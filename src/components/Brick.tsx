@@ -5,7 +5,7 @@ import { useTexture } from "@react-three/drei";
 import { degToRad } from "../utils";
 import useMover from "../hooks/useMover";
 
-export function DestructibleWall({
+export function Brick({
   position,
   rotation,
   length,

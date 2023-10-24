@@ -1,18 +1,22 @@
-import { useThree } from "@react-three/fiber";
-import { useState, useEffect } from "react";
+import { useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
 import Ball from "./components/Ball";
 import LEVELS from "./levels";
+import { useStore } from "./store";
 
 export default function Game() {
   const { camera } = useThree();
-  const [level, setLevel] = useState<keyof typeof LEVELS>(1);
+  const level = useStore((state) => state.level);
 
-  useEffect(() => {
+  useFrame(() => {
+    console.log("NEW LEVEL", level);
     // move camera to the level's position
     const levelObj = LEVELS[level];
-    camera.position.lerp(new THREE.Vector3(...levelObj.cameraPosition), 0.05);
-  }, [level]);
+    const newCameraPosition = new THREE.Vector3(...levelObj.cameraPosition);
+    console.log("newCameraPosition", newCameraPosition);
+
+    camera.position.lerp(newCameraPosition, 0.05);
+  });
 
   return (
     <>
@@ -21,7 +25,7 @@ export default function Game() {
         return <Environment key={level.name} />;
       })}
 
-      <Ball onNewLevel={(newLevel) => setLevel(newLevel)} />
+      <Ball />
     </>
   );
 }

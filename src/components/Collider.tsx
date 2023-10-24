@@ -1,8 +1,9 @@
 import { Vector3 } from "@react-three/fiber";
-import { CuboidCollider, RigidBody } from "@react-three/rapier";
-import { degToRad } from "../utils";
-import { useTexture } from "@react-three/drei";
-import * as THREE from "three";
+import {
+  CuboidCollider,
+  IntersectionEnterPayload,
+  RigidBody,
+} from "@react-three/rapier";
 
 export function Collider({
   position,
@@ -21,9 +22,14 @@ export function Collider({
     <RigidBody>
       <CuboidCollider
         position={position}
+        rotation={[0, 0, rotation ?? 0]}
         args={[length ?? 1, width ?? 1, 1]}
         sensor
-        onIntersectionEnter={onEnter}
+        onIntersectionEnter={({ other }: IntersectionEnterPayload) => {
+          if (other.rigidBody && other.rigidBodyObject?.name === "ball") {
+            onEnter();
+          }
+        }}
       />
     </RigidBody>
   );

@@ -7,15 +7,10 @@ import {
   CuboidCollider,
 } from "@react-three/rapier";
 import { useRef, useEffect } from "react";
-import Levels from "../levels";
 
 const BALL_SPEED = 25;
 
-type Props = {
-  onNewLevel: (newLevel: keyof typeof Levels) => void;
-};
-
-export default function Ball({ onNewLevel }: Props) {
+export default function Ball() {
   const ballRef = useRef<RapierRigidBody>(null);
 
   //   const textureProps = useTexture({
@@ -43,16 +38,6 @@ export default function Ball({ onNewLevel }: Props) {
     //   quaternion.setFromEuler(euler.set(0, 0, (pointer.x * Math.PI) / 10)),
     //   true
     // );
-  });
-
-  // check if ball enter a new level (if it's Y position is greater than minY of a level)
-  useFrame(() => {
-    if (!ballRef.current) return;
-    const currentTranslation = ballRef.current.translation();
-    if (currentTranslation.y > 28) {
-      console.log("enter new level");
-      onNewLevel(2);
-    }
   });
 
   return (

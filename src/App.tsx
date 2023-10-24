@@ -8,12 +8,7 @@ import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { Physics } from "@react-three/rapier";
 import { useEffect, useRef, useState } from "react";
 
-import Ball from "./components/Ball";
-// Levels
-import LEVELS from "./levels";
 import Game from "./Game";
-
-const CAMERA_LOOKAT = new THREE.Vector3(0, 20, 0);
 
 const App = () => {
   return (
@@ -47,7 +42,7 @@ const App = () => {
         {/* <directionalLight position={[0, -5, 0]} color="white" intensity={0} /> */}
 
         <CameraControl />
-        <Physics debug gravity={[0, 0, 0]}>
+        <Physics gravity={[0, 0, 0]}>
           <Game />
         </Physics>
       </Canvas>
@@ -57,7 +52,7 @@ const App = () => {
 
 function CameraControl() {
   const [vec] = useState(() => new THREE.Vector3());
-  const { camera, mouse } = useThree();
+  const { camera } = useThree();
 
   useEffect(() => {
     // camera.lookAt(CAMERA_LOOKAT);
