@@ -6,11 +6,11 @@ import { useStore } from "./store";
 
 export default function Game() {
   const { camera } = useThree();
-  const level = useStore((state) => state.level);
+  const currentLevel = useStore((state) => state.level);
 
   useFrame(() => {
     // move camera to the level's position
-    const levelObj = LEVELS[level];
+    const levelObj = LEVELS[currentLevel];
 
     const currentCameraPosition = camera.position;
     const newCameraPosition = new THREE.Vector3(...levelObj.cameraPosition);
@@ -24,6 +24,11 @@ export default function Game() {
   return (
     <>
       {Object.values(LEVELS).map((level) => {
+        if (
+          level.level !== 1 &&
+          (level.level < currentLevel - 1 || level.level > currentLevel + 1)
+        )
+          return;
         const Environment = level.Environment;
         return <Environment key={level.name} />;
       })}

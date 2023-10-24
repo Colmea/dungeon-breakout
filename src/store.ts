@@ -9,6 +9,6 @@ type Store = {
 };
 
 export const useStore = create<Store>((set) => ({
-  level: 2,
+  level: 1,
   setLevel: (newLevel: LevelKey) => set(() => ({ level: newLevel })),
 }));

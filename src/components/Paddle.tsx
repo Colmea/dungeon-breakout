@@ -9,7 +9,7 @@ import { useRef } from "react";
 import * as THREE from "three";
 
 const PADDLE_WIDTH = 4.8;
-const PADDLE_VELICITY_ADJUSTMENT_FACTOR = 10;
+const PADDLE_VELICITY_ADJUSTMENT_FACTOR = 20;
 
 type Props = {
   name: string;

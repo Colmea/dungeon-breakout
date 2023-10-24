@@ -4,14 +4,13 @@ import { Background } from "../components/Background";
 import Paddle from "../components/Paddle";
 import { Collider } from "../components/Collider";
 import { useStore } from "../store";
-import { Brick } from "../components/Brick";
 import { BrickLine } from "../components/BrickLine";
 
 export default function Level2() {
   const setLevel = useStore((state) => state.setLevel);
 
   return (
-    <group position={[0, 27.5, 0]}>
+    <group position={[0, 52, 0]}>
       <Collider
         position={[0, 3, 0]}
         length={6}
@@ -49,17 +48,6 @@ export default function Level2() {
       <BrickLine position={[-9, 10, 0]} quantity={8} />
       <BrickLine position={[-10.5, 12, 0]} quantity={9} />
       <BrickLine position={[-9, 14, 0]} quantity={8} />
-
-      {/* <Brick position={[-2.6, 13, 0]} />
-      <Brick position={[0, 13, 0]} />
-      <Brick position={[2.6, 13, 0]} />
-
-      <Brick position={[-1.3, 15, 0]} />
-      <Brick position={[1.3, 15, 0]} />
-
-      <Brick position={[-2.6, 17, 0]} />
-      <Brick position={[0, 17, 0]} />
-      <Brick position={[2.6, 17, 0]} /> */}
     </group>
   );
 }
