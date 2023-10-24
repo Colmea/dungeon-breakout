@@ -21,9 +21,7 @@ const Destructible = ({
   const ref = useRef<RapierRigidBody>(null);
   const [currentHealth, setCurrentHealth] = useState(health ?? 1);
 
-  const handleCollision = ({ other, target }: CollisionEnterPayload) => {
-    console.log("collision", other, "target", target);
-
+  const handleCollision = ({ other }: CollisionEnterPayload) => {
     if (other.rigidBodyObject?.name === "ball") {
       setCurrentHealth((prev) => prev - 1);
     }

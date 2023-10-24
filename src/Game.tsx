@@ -9,11 +9,14 @@ export default function Game() {
   const level = useStore((state) => state.level);
 
   useFrame(() => {
-    console.log("NEW LEVEL", level);
     // move camera to the level's position
     const levelObj = LEVELS[level];
+
+    const currentCameraPosition = camera.position;
     const newCameraPosition = new THREE.Vector3(...levelObj.cameraPosition);
-    console.log("newCameraPosition", newCameraPosition);
+
+    // check if camera is already at the new position
+    if (currentCameraPosition.distanceTo(newCameraPosition) < 0.1) return;
 
     camera.position.lerp(newCameraPosition, 0.05);
   });

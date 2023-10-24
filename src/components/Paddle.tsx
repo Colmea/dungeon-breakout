@@ -6,6 +6,7 @@ import {
   RigidBody,
 } from "@react-three/rapier";
 import { useRef } from "react";
+import * as THREE from "three";
 
 const PADDLE_WIDTH = 4.8;
 const PADDLE_VELICITY_ADJUSTMENT_FACTOR = 10;
@@ -14,10 +15,18 @@ type Props = {
   name: string;
   position: THREE.Vector3 | [number, number, number];
   maxDrift: number;
+  hasRotation?: boolean;
 };
 
-export default function Paddle({ name, position, maxDrift }: Props) {
+export default function Paddle({
+  name,
+  position,
+  maxDrift,
+  hasRotation,
+}: Props) {
   const ref = useRef<RapierRigidBody>(null);
+  const quaternion = new THREE.Quaternion();
+  const euler = new THREE.Euler();
 
   const textureProps = useTexture({
     map: "/assets/paddle.png",
@@ -44,39 +53,33 @@ export default function Paddle({ name, position, maxDrift }: Props) {
       },
       true
     );
-    // ref.current.setRotation(
-    //   quaternion.setFromEuler(euler.set(0, 0, (pointer.x * Math.PI) / 10)),
-    //   true
-    // );
+
+    if (hasRotation) {
+      ref.current.setRotation(
+        quaternion.setFromEuler(euler.set(0, 0, (pointer.x * Math.PI) / 10)),
+        true
+      );
+    }
   });
 
   const onCollision = ({ other, target }: CollisionEnterPayload) => {
     // If the ball hits the paddle
     if (other.rigidBody && other.rigidBodyObject?.name === "ball") {
-      console.log("hit paddle");
       // calculate the position of the ball relative to the paddle center
-      // then calculate new velocity based on that (if ball hits the left side of the paddle, it should go left, etc.)
       const ballPosition = other.rigidBody?.translation();
       const paddlePosition = target.rigidBody?.translation();
 
       const ballVelocity = other.rigidBody?.linvel();
 
       if (ballPosition && paddlePosition && ballVelocity) {
-        // Calculate the relative position of the ball to the paddle
         const relativeX = ballPosition.x - paddlePosition.x;
 
-        console.log("relativeX", relativeX);
-        // Assuming a paddle width of 2 units (from -1 to 1), normalize the relative position
-
         const normalizedPosition = relativeX / (PADDLE_WIDTH / 2);
-
-        console.log("normalizedPosition", normalizedPosition);
 
         // Adjust the x-component of the ball's velocity
         ballVelocity.x +=
           normalizedPosition * PADDLE_VELICITY_ADJUSTMENT_FACTOR;
 
-        // Set the new velocity for the ball
         other.rigidBody.setLinvel(ballVelocity, true);
       }
     }
