@@ -8,7 +8,8 @@ import {
 } from "@react-three/rapier";
 import { useRef, useEffect } from "react";
 
-const BALL_SPEED = 25;
+const BALL_SPEED = 10;
+const BALL_SPAWN_POSITION = { x: 0, y: 10, z: 0 };
 
 export default function Ball() {
   const ballRef = useRef<RapierRigidBody>(null);
@@ -19,7 +20,7 @@ export default function Ball() {
 
   const onFinish = ({ other }: CollisionEnterPayload) => {
     console.log("FINISH");
-    other.rigidBody?.setTranslation({ x: 0, y: 10, z: 0 }, true);
+    other.rigidBody?.setTranslation(BALL_SPAWN_POSITION, true);
     other.rigidBody?.setLinvel({ x: 0, y: -BALL_SPEED, z: 0 }, true);
   };
 

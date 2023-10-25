@@ -5,13 +5,13 @@ import Level3 from "./Level3";
 const Levels = {
   1: {
     level: 1,
-    name: "A cute brick",
+    name: "Another Brick In The Wall",
     Environment: Level1,
     cameraPosition: [0, 10, 3],
   },
   2: {
     level: 2,
-    name: "Want more ?",
+    name: "More Brick, More Fun",
     Environment: Level2,
     cameraPosition: [0, 40, 3],
   },

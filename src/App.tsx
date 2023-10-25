@@ -9,10 +9,19 @@ import { Physics } from "@react-three/rapier";
 import { useEffect, useRef, useState } from "react";
 
 import Game from "./Game";
+import Hud from "./ui/Hud";
 
 const App = () => {
   return (
-    <div style={{ height: "800px", width: "800px", margin: "auto" }}>
+    <div
+      style={{
+        position: "relative",
+        height: "800px",
+        width: "800px",
+        margin: "auto",
+      }}
+    >
+      <Hud />
       <Canvas shadows camera={{ position: [0, 20, 45], fov: 50 }}>
         <ambientLight intensity={0.8} />
 
