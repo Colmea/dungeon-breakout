@@ -29,16 +29,6 @@ export default function Level2() {
 
       <Background length={26.1} width={23.5} position={[0, 12, -5]} />
 
-      <Wall rotation={0} position={[-9, 0, 0]} />
-      <Wall rotation={0} position={[9, 0, 0]} />
-
-      <Wall rotation={-90} position={[-13.5, 4, 0]} />
-      <Wall rotation={90} position={[13.5, 4, 0]} />
-      <Wall rotation={-90} position={[-13.5, 12, 0]} />
-      <Wall rotation={90} position={[13.5, 12, 0]} />
-      <Wall rotation={-90} position={[-13.5, 20, 0]} />
-      <Wall rotation={90} position={[13.5, 20, 0]} />
-
       <Wall rotation={-180} position={[-9, 24, 0]} />
 
       <Wall rotation={-180} position={[9, 24, 0]} />

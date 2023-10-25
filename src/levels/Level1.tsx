@@ -24,17 +24,8 @@ export default function Level1() {
       <Background isDark length={50} width={150} position={[0, 20, -5]} />
       <Background length={10} width={38} position={[0, 9, -5]} />
 
-      <Wall rotation={-90} position={[-5, -7, 0]} />
-      <Wall rotation={-90} position={[-5, 1, 0]} />
-      <Wall rotation={-90} position={[-5, 9, 0]} />
-      <Wall rotation={-90} position={[-5, 16, 0]} />
-      <Wall rotation={-90} position={[-5, 24, 0]} />
-
-      <Wall rotation={90} position={[5, -7, 0]} />
-      <Wall rotation={90} position={[5, 1, 0]} />
-      <Wall rotation={90} position={[5, 9, 0]} />
-      <Wall rotation={90} position={[5, 16, 0]} />
-      <Wall rotation={90} position={[5, 24, 0]} />
+      <Wall rotation={-90} position={[-5, 24, 0]} length={5} />
+      <Wall rotation={90} position={[5, -8, 0]} length={5} />
 
       <Brick position={[-2.6, 13, 0]} />
       <Brick position={[0, 13, 0]} />
@@ -47,7 +38,7 @@ export default function Level1() {
       <Brick position={[0, 17, 0]} />
       <Brick position={[2.6, 17, 0]} />
 
-      <Door position={[0, 28, 0]} />
+      <Door position={[0, 27.5, 0]} />
     </group>
   );
 }

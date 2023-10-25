@@ -9,14 +9,12 @@ export function Wall({
   position,
   rotation,
   length,
-  width,
   color,
   texture,
 }: {
   position: Vector3;
   rotation?: number;
   length?: number;
-  width?: number;
   color?: string;
   texture?: Record<string, string>;
 }) {
@@ -40,15 +38,17 @@ export function Wall({
       restitution={1}
       friction={0}
     >
-      <mesh castShadow>
-        <boxGeometry args={[length ?? 8, width ?? 1]} />
-        <meshPhongMaterial
-          {...textureProps}
-          color={color ? color : undefined}
-          opacity={0.9}
-          transparent
-        />
-      </mesh>
+      {Array.from({ length: length ?? 1 }, (_, i) => (
+        <mesh castShadow key={i} position={[i * 8, 0, 0]}>
+          <boxGeometry args={[8, 1]} />
+          <meshPhongMaterial
+            {...textureProps}
+            color={color ? color : undefined}
+            opacity={0.9}
+            transparent
+          />
+        </mesh>
+      ))}
     </RigidBody>
   );
 }

@@ -67,7 +67,7 @@ export function Door({
           position={position}
           rotation={[0, 0, degToRad(rotation ?? 180)]}
         >
-          <boxGeometry args={[8, 0.6]} />
+          <boxGeometry args={[9, 0.7]} />
           <meshPhongMaterial {...textureProps} opacity={0.9} transparent />
         </mesh>
       )}

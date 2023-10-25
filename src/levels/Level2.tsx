@@ -28,16 +28,11 @@ export default function Level2() {
       <Wall rotation={0} position={[-9, 0, 0]} />
       <Wall rotation={0} position={[9, 0, 0]} />
 
-      <Wall rotation={-90} position={[-13.5, 4, 0]} />
-      <Wall rotation={90} position={[13.5, 4, 0]} />
-      <Wall rotation={-90} position={[-13.5, 12, 0]} />
-      <Wall rotation={90} position={[13.5, 12, 0]} />
-      <Wall rotation={-90} position={[-13.5, 20, 0]} />
-      <Wall rotation={90} position={[13.5, 20, 0]} />
-
       <Wall rotation={-180} position={[-9, 24, 0]} />
 
       <Wall rotation={-180} position={[9, 24, 0]} />
+      <Wall rotation={-90} position={[-13.5, 20, 0]} length={3} />
+      <Wall rotation={90} position={[13.5, 4, 0]} length={3} />
 
       <Door position={[0, 23.9, 0]} />
 
@@ -45,7 +40,7 @@ export default function Level2() {
       <BrickLine position={[-10.5, 12, 0]} quantity={9} />
       <BrickLine position={[-9, 14, 0]} quantity={8} />
 
-      <Platform position={[-3.5, 22, 0]} />
+      <Platform position={[-3.5, 20, 0]} rotation={180} />
     </group>
   );
 }
