@@ -9,7 +9,7 @@ export default function Hud() {
 
   useEffect(() => {
     setShowLevel(true);
-    const timeout = setTimeout(() => setShowLevel(false), 3000);
+    const timeout = setTimeout(() => setShowLevel(false), 5000);
     return () => clearTimeout(timeout);
   }, [currentLevel]);
 

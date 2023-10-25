@@ -1,10 +1,10 @@
 import { Vector3 } from "@react-three/fiber";
-
-import { useRef } from "react";
+import { RapierRigidBody, RigidBody } from "@react-three/rapier";
 import { useTexture } from "@react-three/drei";
-import { degToRad } from "../utils";
-import useMover from "../hooks/useMover";
-import { RigidBody } from "@react-three/rapier";
+import { useRef } from "react";
+
+import { degToRad } from "@/utils";
+import useMover from "@/hooks/useMover";
 
 export function Platform({
   position,
@@ -17,10 +17,10 @@ export function Platform({
     map: "/assets/platform.png",
   });
 
-  const ref = useRef<THREE.Mesh>(null);
+  const ref = useRef<RapierRigidBody>(null);
 
   useMover({
-    meshRef: ref,
+    ref: ref,
     direction: "x",
     offset: 3,
     speed: 0.5,
@@ -28,6 +28,7 @@ export function Platform({
 
   return (
     <RigidBody
+      ref={ref}
       colliders="cuboid"
       type="fixed"
       position={position}
@@ -35,7 +36,7 @@ export function Platform({
       restitution={1}
       friction={0}
     >
-      <mesh castShadow ref={ref}>
+      <mesh castShadow>
         <boxGeometry args={[4.8, 0.6]} />
         <meshPhongMaterial {...textureProps} opacity={1} transparent />
       </mesh>

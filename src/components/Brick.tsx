@@ -1,9 +1,10 @@
 import { Vector3 } from "@react-three/fiber";
-import Destructible from "./Destructible";
-import { useRef, useState } from "react";
 import { useTexture } from "@react-three/drei";
-import { degToRad } from "../utils";
-import useMover from "../hooks/useMover";
+import { useRef, useState } from "react";
+
+import Destructible from "@components/Destructible";
+import { degToRad } from "@/utils";
+import useMeshMover from "@/hooks/useMeshMover";
 
 export function Brick({
   position,
@@ -22,7 +23,7 @@ export function Brick({
 
   const ref = useRef<THREE.Mesh>(null);
 
-  useMover({
+  useMeshMover({
     meshRef: ref,
     direction: "y",
   });

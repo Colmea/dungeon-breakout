@@ -1,5 +1,4 @@
 import {
-  CoefficientCombineRule,
   CollisionEnterPayload,
   RapierRigidBody,
   RigidBody,
@@ -49,7 +48,7 @@ const Destructible = ({
       onCollisionEnter={handleCollision}
       colliders="cuboid"
       restitution={1}
-      friction={CoefficientCombineRule.Min}
+      friction={0}
       lockRotations={false}
     >
       {children}

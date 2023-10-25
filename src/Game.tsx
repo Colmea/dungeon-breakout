@@ -1,8 +1,8 @@
 import { useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
-import Ball from "./components/Ball";
-import LEVELS from "./levels";
-import { useStore } from "./store";
+import Ball from "@components/Ball";
+import LEVELS from "@/levels";
+import { useStore } from "@/store";
 
 export default function Game() {
   const { camera } = useThree();

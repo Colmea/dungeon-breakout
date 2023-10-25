@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import LEVELS from "./levels";
+import LEVELS from "@/levels";
 
 export type LevelKey = keyof typeof LEVELS;
 

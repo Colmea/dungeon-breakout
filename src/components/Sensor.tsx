@@ -5,7 +5,7 @@ import {
   RigidBody,
 } from "@react-three/rapier";
 
-export function Collider({
+export function Sensor({
   position,
   rotation,
   length,

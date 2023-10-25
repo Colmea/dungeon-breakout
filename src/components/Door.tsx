@@ -1,8 +1,8 @@
 import { Vector3 } from "@react-three/fiber";
-import Destructible from "./Destructible";
-import { useState } from "react";
 import { useTexture } from "@react-three/drei";
-import { degToRad } from "../utils";
+import { useState } from "react";
+import Destructible from "@components/Destructible";
+import { degToRad } from "@/utils";
 
 export function Door({
   position,

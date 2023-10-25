@@ -1,15 +1,14 @@
-import * as THREE from "three";
 import {
   AccumulativeShadows,
   OrthographicCamera,
   RandomizedLight,
 } from "@react-three/drei";
-import { Canvas, useFrame, useThree } from "@react-three/fiber";
+import { Canvas, useThree } from "@react-three/fiber";
 import { Physics } from "@react-three/rapier";
-import { useEffect, useRef, useState } from "react";
+import { useEffect } from "react";
 
-import Game from "./Game";
-import Hud from "./ui/Hud";
+import Game from "@/Game";
+import Hud from "@/ui/Hud";
 
 const App = () => {
   return (
@@ -44,12 +43,6 @@ const App = () => {
           />
         </AccumulativeShadows>
 
-        {/* <Light /> */}
-        {/* <spotLight position={[50, 50, -30]} castShadow /> */}
-        {/* <pointLight position={[-10, -10, -10]} color="red" intensity={5} /> */}
-        {/* <pointLight position={[0, -5, 5]} intensity={0.5} /> */}
-        {/* <directionalLight position={[0, -5, 0]} color="white" intensity={0} /> */}
-
         <CameraControl />
         <Physics debug gravity={[0, 0, 0]}>
           <Game />
@@ -60,7 +53,7 @@ const App = () => {
 };
 
 function CameraControl() {
-  const [vec] = useState(() => new THREE.Vector3());
+  // const [vec] = useState(() => new THREE.Vector3());
   const { camera } = useThree();
 
   useEffect(() => {
@@ -79,27 +72,6 @@ function CameraControl() {
   //   pitchFrequency={0.5}
   //   rollFrequency={0.4}
   // />
-}
-
-function Light() {
-  const ref = useRef<any>();
-  useFrame((_) => {
-    if (!ref.current) return;
-
-    ref.current.rotation.x = _.clock.elapsedTime;
-  });
-
-  return (
-    <group ref={ref}>
-      <rectAreaLight
-        width={15}
-        height={100}
-        position={[30, 30, -10]}
-        intensity={5}
-        onUpdate={(self) => self.lookAt(0, 0, 0)}
-      />
-    </group>
-  );
 }
 
 export default App;

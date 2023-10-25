@@ -1,4 +1,4 @@
-import { Brick } from "./Brick";
+import { Brick } from "@components/Brick";
 
 export function BrickLine({
   position,

@@ -9,7 +9,7 @@ import {
 import { useRef, useEffect } from "react";
 import * as THREE from "three";
 
-const BALL_SPEED = 15;
+const BALL_SPEED = 12;
 const BALL_SPAWN_POSITION = new THREE.Vector3(0, 10, 0);
 
 export default function Ball() {

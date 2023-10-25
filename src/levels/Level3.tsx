@@ -1,17 +1,17 @@
-import { Wall } from "../components/Wall";
-import { Door } from "../components/Door";
-import { Background } from "../components/Background";
-import Paddle from "../components/Paddle";
-import { Collider } from "../components/Collider";
-import { useStore } from "../store";
-import { BrickLine } from "../components/BrickLine";
+import { useStore } from "@/store";
+import { Wall } from "@components/Wall";
+import { Door } from "@components/Door";
+import { Background } from "@components/Background";
+import Paddle from "@components/Paddle";
+import { Sensor } from "@components/Sensor";
+import { BrickLine } from "@components/BrickLine";
 
 export default function Level2() {
   const setLevel = useStore((state) => state.setLevel);
 
   return (
     <group position={[0, 52, 0]}>
-      <Collider
+      <Sensor
         position={[0, 3, 0]}
         length={6}
         width={0.5}

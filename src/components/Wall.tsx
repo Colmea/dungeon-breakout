@@ -1,8 +1,9 @@
 import { Vector3 } from "@react-three/fiber";
 import { RigidBody } from "@react-three/rapier";
-import { degToRad } from "../utils";
 import { useTexture } from "@react-three/drei";
 import * as THREE from "three";
+
+import { degToRad } from "@/utils";
 
 export function Wall({
   position,
