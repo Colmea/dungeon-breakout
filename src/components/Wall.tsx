@@ -36,7 +36,7 @@ export function Wall({
       type="fixed"
       position={position}
       rotation={[0, 0, degToRad(rotation ?? 0)]}
-      restitution={2}
+      restitution={1}
       friction={0}
     >
       <mesh castShadow>

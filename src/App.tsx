@@ -51,7 +51,7 @@ const App = () => {
         {/* <directionalLight position={[0, -5, 0]} color="white" intensity={0} /> */}
 
         <CameraControl />
-        <Physics gravity={[0, 0, 0]}>
+        <Physics debug gravity={[0, 0, 0]}>
           <Game />
         </Physics>
       </Canvas>

@@ -92,7 +92,7 @@ export default function Paddle({
       colliders="cuboid"
       onCollisionEnter={onCollision}
       type="fixed"
-      restitution={2}
+      restitution={1}
       friction={0}
       lockRotations={true}
     >

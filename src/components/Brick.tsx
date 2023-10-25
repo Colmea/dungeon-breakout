@@ -22,7 +22,10 @@ export function Brick({
 
   const ref = useRef<THREE.Mesh>(null);
 
-  useMover(ref);
+  useMover({
+    meshRef: ref,
+    direction: "y",
+  });
 
   return (
     <Destructible

@@ -7,9 +7,10 @@ import {
   CuboidCollider,
 } from "@react-three/rapier";
 import { useRef, useEffect } from "react";
+import * as THREE from "three";
 
-const BALL_SPEED = 10;
-const BALL_SPAWN_POSITION = { x: 0, y: 10, z: 0 };
+const BALL_SPEED = 15;
+const BALL_SPAWN_POSITION = new THREE.Vector3(0, 10, 0);
 
 export default function Ball() {
   const ballRef = useRef<RapierRigidBody>(null);
@@ -47,9 +48,11 @@ export default function Ball() {
         name="ball"
         ref={ballRef}
         colliders="ball"
-        mass={0}
-        position={[0, 10, 0]}
+        mass={1}
+        position={BALL_SPAWN_POSITION}
         lockRotations={false}
+        friction={0}
+        restitution={1}
       >
         <mesh castShadow>
           <sphereGeometry args={[0.7, 16, 16]} />

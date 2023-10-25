@@ -5,6 +5,7 @@ import Paddle from "../components/Paddle";
 import { Collider } from "../components/Collider";
 import { useStore } from "../store";
 import { BrickLine } from "../components/BrickLine";
+import { Platform } from "../components/Platform";
 
 export default function Level2() {
   const setLevel = useStore((state) => state.setLevel);
@@ -20,12 +21,7 @@ export default function Level2() {
         }}
       />
 
-      <Paddle
-        hasRotation
-        name="paddle-2"
-        position={[0, 2.5, 0]}
-        maxDrift={10}
-      />
+      <Paddle name="paddle-2" position={[0, 2.5, 0]} maxDrift={10} />
 
       <Background length={26.1} width={23.5} position={[0, 12, -5]} />
 
@@ -48,6 +44,8 @@ export default function Level2() {
       <BrickLine position={[-9, 10, 0]} quantity={8} />
       <BrickLine position={[-10.5, 12, 0]} quantity={9} />
       <BrickLine position={[-9, 14, 0]} quantity={8} />
+
+      <Platform position={[-3.5, 22, 0]} />
     </group>
   );
 }
