@@ -23,7 +23,8 @@
     "paths": {
       "@/*": ["src/*"],
       "@components/*": ["src/components/*"],
-      "@assets/*": ["public/assets/*"]
+      "@assets/*": ["public/assets/*"],
+      "use-sound": ["./types/"]
     }
   },
   "include": ["src"],

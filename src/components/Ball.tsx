@@ -8,12 +8,19 @@ import {
 } from "@react-three/rapier";
 import { useRef, useEffect } from "react";
 import * as THREE from "three";
+import useSound from "use-sound";
+
+import ballHit from "@assets/sounds/ball-hit.mp3";
 
 const BALL_SPEED = 12;
 const BALL_SPAWN_POSITION = new THREE.Vector3(0, 10, 0);
 
 export default function Ball() {
   const ballRef = useRef<RapierRigidBody>(null);
+
+  const [playBallHit] = useSound(ballHit, {
+    volume: 0.3,
+  });
 
   //   const textureProps = useTexture({
   //     map: "/assets/ball.png",
@@ -53,6 +60,7 @@ export default function Ball() {
         lockRotations={false}
         friction={0}
         restitution={1}
+        onCollisionEnter={() => playBallHit()}
       >
         <mesh castShadow>
           <sphereGeometry args={[0.7, 16, 16]} />

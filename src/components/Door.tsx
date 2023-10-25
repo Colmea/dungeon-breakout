@@ -1,8 +1,12 @@
-import { Vector3 } from "@react-three/fiber";
+import { Vector3, useFrame } from "@react-three/fiber";
 import { useTexture } from "@react-three/drei";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import * as THREE from "three";
+import useSound from "use-sound";
+
 import Destructible from "@components/Destructible";
 import { degToRad } from "@/utils";
+import doorHitSfx from "@assets/sounds/door-hit.mp3";
 
 export function Door({
   position,
@@ -12,14 +16,40 @@ export function Door({
   rotation?: number;
   length?: number;
 }) {
+  const meshRef = useRef<THREE.Mesh>(null);
   const [isAlive, setIsAlive] = useState(true);
+  const [isHit, setIsHit] = useState(false);
 
   const textureProps = useTexture({
     map: "/assets/door.png",
   });
 
-  // textureProps.map.wrapS = textureProps.map.wrapT = THREE.RepeatWrapping;
-  // textureProps.map.repeat.set(2, 1);
+  const [playDoorHitSfx] = useSound(doorHitSfx, {
+    volume: 0.2,
+  });
+
+  useEffect(() => {
+    if (isHit) {
+      setTimeout(() => {
+        setIsHit(false);
+      }, 75);
+    }
+  });
+
+  useFrame(() => {
+    if (!meshRef.current) return;
+
+    const material = meshRef.current.material as THREE.MeshPhongMaterial;
+
+    material.color.lerp(new THREE.Color(isHit ? "red" : "white"), 0.1);
+  });
+
+  const handleHit = () => {
+    setIsHit(true);
+
+    // play sound door-hit.mp3
+    playDoorHitSfx();
+  };
 
   return (
     <Destructible
@@ -28,9 +58,11 @@ export function Door({
       onDestruction={() => {
         setIsAlive(false);
       }}
+      onHit={handleHit}
     >
       {isAlive && (
         <mesh
+          ref={meshRef}
           castShadow
           position={position}
           rotation={[0, 0, degToRad(rotation ?? 180)]}

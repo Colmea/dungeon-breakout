@@ -10,6 +10,7 @@ type DestructibleProps = {
   isAlive: boolean;
   health?: number;
   onDestruction: () => void;
+  onHit?: () => void;
 };
 
 const Destructible = ({
@@ -17,13 +18,17 @@ const Destructible = ({
   isAlive,
   health,
   onDestruction,
+  onHit,
 }: DestructibleProps) => {
   const ref = useRef<RapierRigidBody>(null);
   const [currentHealth, setCurrentHealth] = useState(health ?? 1);
 
+  // Handle collisions
   const handleCollision = ({ other }: CollisionEnterPayload) => {
     if (other.rigidBodyObject?.name === "ball") {
       setCurrentHealth((prev) => prev - 1);
+
+      onHit?.();
     }
   };
 

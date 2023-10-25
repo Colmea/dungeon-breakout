@@ -6,11 +6,27 @@ import {
 import { Canvas, useThree } from "@react-three/fiber";
 import { Physics } from "@react-three/rapier";
 import { useEffect } from "react";
+import useSound from "use-sound";
 
 import Game from "@/Game";
 import Hud from "@/ui/Hud";
+import soundtrack from "@assets/soundtracks/soundtrack-001.mp3";
+import { useStore } from "@/store";
 
 const App = () => {
+  const hasGameStarted = useStore((state) => state.started);
+
+  const [playSoundtrack] = useSound(soundtrack, {
+    volume: 0.5,
+    loop: true,
+  });
+
+  useEffect(() => {
+    if (hasGameStarted) {
+      playSoundtrack();
+    }
+  }, [hasGameStarted]);
+
   return (
     <div
       style={{
