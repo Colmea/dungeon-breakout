@@ -5,6 +5,7 @@ import { useRef, useState } from "react";
 import Destructible from "@components/Destructible";
 import { degToRad } from "@/utils";
 import useMeshMover from "@/hooks/useMeshMover";
+import Outline from "@components/utils/Outline";
 
 export function Key({
   position,
@@ -51,9 +52,11 @@ export function Key({
             receiveShadow
           >
             <meshPhongMaterial color="orange" />
+            <Outline />
           </Torus>
           <Box args={[0.2, 1.4, 0.3]} position={[0, -1.2, 0]} receiveShadow>
             <meshPhongMaterial color="orange" />
+            <Outline />
           </Box>
           <Box
             args={[0.7, 0.3, 0.2]}
@@ -62,6 +65,7 @@ export function Key({
             receiveShadow
           >
             <meshPhongMaterial color="orange" />
+            <Outline />
           </Box>
           <Box
             args={[0.7, 0.3, 0.2]}
@@ -70,6 +74,7 @@ export function Key({
             receiveShadow
           >
             <meshPhongMaterial color="orange" />
+            <Outline />
           </Box>
         </group>
       )}

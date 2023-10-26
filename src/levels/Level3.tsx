@@ -5,11 +5,16 @@ import { Background } from "@components/Background";
 import Paddle from "@components/Paddle";
 import { BrickLine } from "@components/BrickLine";
 import { Key } from "@components/Key";
+import { Platform } from "@components/Platform";
+import { Button } from "@components/Button";
+import { useState } from "react";
 
 export default function Level2() {
   const hasKey = useStore((state) => state.hasKey);
   // const setLevel = useStore((state) => state.setLevel);
   const pickupKey = useStore((state) => state.pickupKey);
+
+  const [isDoorOpen, setIsDoorOpen] = useState(false);
 
   return (
     <group position={[0, 52, 0]}>
@@ -32,10 +37,28 @@ export default function Level2() {
 
       <Door isLocked={!hasKey} position={[0, 23.8, 0]} />
 
-      <BrickLine position={[-9, 10, 0]} quantity={8} />
-      <BrickLine position={[-10.5, 12, 0]} quantity={9} />
-      <BrickLine position={[-9, 14, 0]} quantity={8} />
+      <BrickLine position={[-19.5, 14, 0]} quantity={5} />
+      <BrickLine position={[-18, 16, 0]} quantity={5} />
+      <BrickLine position={[-19.5, 18, 0]} quantity={5} />
 
+      <BrickLine position={[0.5, 14, 0]} quantity={5} />
+      <BrickLine position={[0, 16, 0]} quantity={5} />
+      <BrickLine position={[0.5, 18, 0]} quantity={5} />
+
+      {!isDoorOpen && (
+        <Platform
+          position={[-17, 23.8, 0]}
+          length={8}
+          rotation={180}
+          offset={0}
+        />
+      )}
+
+      <Button
+        onPress={() => setIsDoorOpen(true)}
+        rotation={180}
+        position={[-11.5, 23, 0]}
+      />
       <Key position={[-17, 29, 0]} onPickup={pickupKey} />
     </group>
   );

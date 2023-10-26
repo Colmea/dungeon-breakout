@@ -9,9 +9,13 @@ import useMover from "@/hooks/useMover";
 export function Platform({
   position,
   rotation,
+  length = 4.8,
+  offset = 3,
 }: {
   position: Vector3;
   rotation?: number;
+  length?: number;
+  offset?: number;
 }) {
   const textureProps = useTexture({
     map: "/assets/platform.png",
@@ -22,7 +26,7 @@ export function Platform({
   useMover({
     ref: ref,
     direction: "x",
-    offset: 3,
+    offset: offset,
     speed: 0.5,
   });
 
@@ -37,7 +41,7 @@ export function Platform({
       friction={0}
     >
       <mesh castShadow>
-        <boxGeometry args={[4.8, 0.6]} />
+        <boxGeometry args={[length ?? 4.8, 0.6]} />
         <meshPhongMaterial {...textureProps} opacity={1} transparent />
       </mesh>
     </RigidBody>

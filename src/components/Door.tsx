@@ -51,8 +51,6 @@ export function Door({
     if (isLocked) return;
 
     setIsHit(true);
-
-    // play sound door-hit.mp3
     playDoorHitSfx();
   };
 

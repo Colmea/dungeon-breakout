@@ -17,7 +17,7 @@ const Levels = {
   },
   3: {
     level: 3,
-    name: "Level 3",
+    name: "Hold The Door",
     Environment: Level3,
     cameraPosition: [-4, 68, 3],
   },
