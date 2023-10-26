@@ -13,7 +13,7 @@ export function Background({
   isDark?: boolean;
 }) {
   return (
-    <mesh castShadow position={position}>
+    <mesh castShadow receiveShadow position={position}>
       <boxGeometry args={[length ?? 10, width ?? 10]} />
       <meshPhongMaterial
         color={isDark ? "#33323d" : "#f5f5f5"}

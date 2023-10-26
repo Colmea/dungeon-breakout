@@ -6,6 +6,7 @@ import LEVELS from "../levels";
 export default function Hud() {
   const currentLevel = useStore((state) => state.level);
   const hasGameStarted = useStore((state) => state.started);
+  const hasKey = useStore((state) => state.hasKey);
   const startGame = useStore((state) => state.startGame);
 
   const [showLevel, setShowLevel] = useState(false);
@@ -48,6 +49,12 @@ export default function Hud() {
           </div>
         </div>
       )}
+      {
+        <div style={{ display: "flex", gap: 20 }}>
+          <div>Level: {currentLevel}</div>
+          <div>Has Key: {JSON.stringify(hasKey)}</div>
+        </div>
+      }
       <div style={{ position: "absolute", zIndex: 20, width: "100%" }}>
         <animated.div style={levelSpring}>
           <div

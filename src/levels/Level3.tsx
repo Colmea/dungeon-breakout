@@ -3,24 +3,17 @@ import { Wall } from "@components/Wall";
 import { Door } from "@components/Door";
 import { Background } from "@components/Background";
 import Paddle from "@components/Paddle";
-import { Sensor } from "@components/Sensor";
 import { BrickLine } from "@components/BrickLine";
+import { Key } from "@components/Key";
 
 export default function Level2() {
-  const setLevel = useStore((state) => state.setLevel);
+  const hasKey = useStore((state) => state.hasKey);
+  // const setLevel = useStore((state) => state.setLevel);
+  const pickupKey = useStore((state) => state.pickupKey);
 
   return (
     <group position={[0, 52, 0]}>
-      <Sensor
-        position={[0, 2, 0]}
-        length={6}
-        width={0.5}
-        onEnter={() => {
-          setLevel(2);
-        }}
-      />
-
-      <Paddle position={[0, 2, 0]} maxDrift={10} />
+      <Paddle position={[0, 2, 0]} maxDrift={18} />
 
       <Background length={35} width={24} position={[-4, 12, -5]} />
       <Background length={9} width={8} position={[-17, 28, -5]} />
@@ -37,11 +30,13 @@ export default function Level2() {
       <Wall rotation={-180} position={[-9, 24, 0]} />
       <Wall rotation={-180} position={[9, 24, 0]} />
 
-      <Door position={[0, 23.8, 0]} />
+      <Door isLocked={!hasKey} position={[0, 23.8, 0]} />
 
       <BrickLine position={[-9, 10, 0]} quantity={8} />
       <BrickLine position={[-10.5, 12, 0]} quantity={9} />
       <BrickLine position={[-9, 14, 0]} quantity={8} />
+
+      <Key position={[-17, 29, 0]} onPickup={pickupKey} />
     </group>
   );
 }

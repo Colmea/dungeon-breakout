@@ -8,6 +8,7 @@ import { useEffect, useRef, useState } from "react";
 type DestructibleProps = {
   children: React.ReactNode;
   isAlive: boolean;
+  isDestructible?: boolean;
   health?: number;
   onDestruction: () => void;
   onHit?: () => void;
@@ -16,6 +17,7 @@ type DestructibleProps = {
 const Destructible = ({
   children,
   isAlive,
+  isDestructible = true,
   health,
   onDestruction,
   onHit,
@@ -25,6 +27,8 @@ const Destructible = ({
 
   // Handle collisions
   const handleCollision = ({ other }: CollisionEnterPayload) => {
+    if (!isDestructible) return;
+
     if (other.rigidBodyObject?.name === "ball") {
       setCurrentHealth((prev) => prev - 1);
 

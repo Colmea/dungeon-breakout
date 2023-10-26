@@ -14,7 +14,7 @@ const PADDLE_VELICITY_ADJUSTMENT_FACTOR = 20;
 
 type Props = {
   name?: string;
-  position: THREE.Vector3 | [number, number, number];
+  position: [number, number, number];
   rotation?: number;
   maxDrift: number;
   hasRotation?: boolean;
@@ -98,12 +98,10 @@ export default function Paddle({
       restitution={1}
       friction={0}
       lockRotations={true}
+      position={position}
+      rotation={[0, 0, degToRad(rotation ?? 0)]}
     >
-      <mesh
-        castShadow
-        position={position}
-        rotation={[0, 0, degToRad(rotation ?? 0)]}
-      >
+      <mesh castShadow>
         <boxGeometry args={[PADDLE_WIDTH, 1.6, 1]} />
         <meshStandardMaterial {...textureProps} transparent />
       </mesh>

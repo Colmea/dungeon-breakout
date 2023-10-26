@@ -11,14 +11,17 @@ import doorHitSfx from "@assets/sounds/door-hit.mp3";
 export function Door({
   position,
   rotation,
+  isLocked = false,
 }: {
   position: Vector3;
   rotation?: number;
-  length?: number;
+  isLocked?: boolean;
 }) {
   const meshRef = useRef<THREE.Mesh>(null);
   const [isAlive, setIsAlive] = useState(true);
   const [isHit, setIsHit] = useState(false);
+
+  const baseColor = isLocked ? "grey" : "white";
 
   const textureProps = useTexture({
     map: "/assets/door.png",
@@ -41,10 +44,12 @@ export function Door({
 
     const material = meshRef.current.material as THREE.MeshPhongMaterial;
 
-    material.color.lerp(new THREE.Color(isHit ? "red" : "white"), 0.1);
+    material.color.lerp(new THREE.Color(isHit ? "red" : baseColor), 0.1);
   });
 
   const handleHit = () => {
+    if (isLocked) return;
+
     setIsHit(true);
 
     // play sound door-hit.mp3
@@ -54,6 +59,7 @@ export function Door({
   return (
     <Destructible
       isAlive={isAlive}
+      isDestructible={!isLocked}
       health={2}
       onDestruction={() => {
         setIsAlive(false);
@@ -68,7 +74,12 @@ export function Door({
           rotation={[0, 0, degToRad(rotation ?? 180)]}
         >
           <boxGeometry args={[9, 0.7]} />
-          <meshPhongMaterial {...textureProps} opacity={0.9} transparent />
+          <meshPhongMaterial
+            {...textureProps}
+            color={baseColor}
+            opacity={0.9}
+            transparent
+          />
         </mesh>
       )}
     </Destructible>
