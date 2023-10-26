@@ -19,7 +19,7 @@ const Levels = {
     level: 3,
     name: "Level 3",
     Environment: Level3,
-    cameraPosition: [0, 90, 3],
+    cameraPosition: [-4, 68, 3],
   },
 };
 

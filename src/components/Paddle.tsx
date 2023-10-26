@@ -1,3 +1,4 @@
+import { degToRad } from "@/utils";
 import { useTexture } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import {
@@ -12,8 +13,9 @@ const PADDLE_WIDTH = 4.8;
 const PADDLE_VELICITY_ADJUSTMENT_FACTOR = 20;
 
 type Props = {
-  name: string;
+  name?: string;
   position: THREE.Vector3 | [number, number, number];
+  rotation?: number;
   maxDrift: number;
   hasRotation?: boolean;
 };
@@ -21,6 +23,7 @@ type Props = {
 export default function Paddle({
   name,
   position,
+  rotation,
   maxDrift,
   hasRotation,
 }: Props) {
@@ -96,7 +99,11 @@ export default function Paddle({
       friction={0}
       lockRotations={true}
     >
-      <mesh castShadow position={position}>
+      <mesh
+        castShadow
+        position={position}
+        rotation={[0, 0, degToRad(rotation ?? 0)]}
+      >
         <boxGeometry args={[PADDLE_WIDTH, 1.6, 1]} />
         <meshStandardMaterial {...textureProps} transparent />
       </mesh>

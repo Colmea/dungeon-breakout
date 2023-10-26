@@ -44,7 +44,7 @@ export function Wall({
           <meshPhongMaterial
             {...textureProps}
             color={color ? color : undefined}
-            opacity={0.9}
+            opacity={1}
             transparent
           />
         </mesh>
