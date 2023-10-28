@@ -1,3 +1,4 @@
+import CONFIG from "@/Config";
 import { degToRad } from "@/utils";
 import { useTexture } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
@@ -5,12 +6,13 @@ import {
   CollisionEnterPayload,
   RapierRigidBody,
   RigidBody,
+  vec3,
 } from "@react-three/rapier";
 import { useRef } from "react";
 import * as THREE from "three";
 
 const PADDLE_WIDTH = 4.8;
-const PADDLE_VELICITY_ADJUSTMENT_FACTOR = 20;
+const PADDLE_VELICITY_ADJUSTMENT_FACTOR = 10;
 
 type Props = {
   name?: string;
@@ -35,6 +37,7 @@ export default function Paddle({
     map: "/assets/paddle.png",
   });
 
+  // Paddle Mouse follower
   useFrame(({ pointer, viewport }) => {
     if (!ref.current) return;
 
@@ -65,14 +68,14 @@ export default function Paddle({
     }
   });
 
+  // Paddle collision
   const onCollision = ({ other, target }: CollisionEnterPayload) => {
-    // If the ball hits the paddle
     if (other.rigidBody && other.rigidBodyObject?.name === "ball") {
       // calculate the position of the ball relative to the paddle center
       const ballPosition = other.rigidBody?.translation();
       const paddlePosition = target.rigidBody?.translation();
 
-      const ballVelocity = other.rigidBody?.linvel();
+      const ballVelocity = vec3(other.rigidBody?.linvel());
 
       if (ballPosition && paddlePosition && ballVelocity) {
         const relativeX = ballPosition.x - paddlePosition.x;
@@ -82,6 +85,9 @@ export default function Paddle({
         // Adjust the x-component of the ball's velocity
         ballVelocity.x +=
           normalizedPosition * PADDLE_VELICITY_ADJUSTMENT_FACTOR;
+
+        // Maintain the original speed
+        ballVelocity.normalize().multiplyScalar(CONFIG.BALL_SPEED); // Maintain the original speed
 
         other.rigidBody.setLinvel(ballVelocity, true);
       }

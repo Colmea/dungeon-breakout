@@ -8,16 +8,25 @@ import { Key } from "@components/Key";
 import { Platform } from "@components/Platform";
 import { Button } from "@components/Button";
 import { useState } from "react";
+import { Sensor } from "@/components/Sensor";
 
 export default function Level2() {
   const hasKey = useStore((state) => state.hasKey);
-  // const setLevel = useStore((state) => state.setLevel);
+  const setLevel = useStore((state) => state.setLevel);
   const pickupKey = useStore((state) => state.pickupKey);
 
   const [isDoorOpen, setIsDoorOpen] = useState(false);
 
   return (
     <group position={[0, 52, 0]}>
+      <Sensor
+        position={[0, 2, 0]}
+        length={6}
+        width={0.5}
+        onEnter={() => {
+          setLevel(3);
+        }}
+      />
       <Paddle position={[0, 2, 0]} maxDrift={18} />
 
       <Background length={35} width={24} position={[-4, 12, -5]} />

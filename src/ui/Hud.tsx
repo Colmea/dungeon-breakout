@@ -2,6 +2,9 @@ import { useStore } from "../store";
 import { useState, useEffect } from "react";
 import { useSpring, animated } from "@react-spring/web";
 import LEVELS from "../levels";
+import Panel from "@/ui/Panel";
+import Button from "@/ui/Button";
+import logo from "@assets/logo.png";
 
 export default function Hud() {
   const currentLevel = useStore((state) => state.level);
@@ -36,16 +39,49 @@ export default function Hud() {
             display: "flex",
             flexDirection: "column",
             justifyContent: "center",
+            alignItems: "center",
+            backgroundColor: "rgba(0,0,0,0.6)",
           }}
         >
-          <div
-            style={{
-              textAlign: "center",
-              backgroundColor: "rgba(0,0,0,0.7)",
-              padding: "50px",
-            }}
-          >
-            <button onClick={() => startGame()}>PLAY</button>
+          <Panel>
+            <div style={{ marginTop: -150 }}>
+              <img src={logo} style={{ width: 220 }} />
+            </div>
+
+            <p
+              style={{
+                backgroundColor: "rgba(206, 117, 0, 0.1)",
+                borderRadius: 5,
+                padding: 3,
+              }}
+            >
+              <strong>Move</strong> the paddle with your <strong>mouse</strong>{" "}
+              to break the bricks
+            </p>
+            <p
+              style={{
+                backgroundColor: "rgba(206, 117, 0, 0.1)",
+                borderRadius: 5,
+                padding: 3,
+              }}
+            >
+              Press <strong>Space</strong> to use a new ball <br /> (you only
+              have 5 !)
+            </p>
+            <p
+              style={{
+                backgroundColor: "rgba(206, 117, 0, 0.1)",
+                borderRadius: 5,
+                padding: 3,
+              }}
+            >
+              <strong>Click</strong> to launch the ball
+            </p>
+
+            {/* <button onClick={() => startGame()}>sdf</button> */}
+          </Panel>
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            <Button onClick={() => startGame()} />
           </div>
         </div>
       )}
