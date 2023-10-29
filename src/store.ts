@@ -26,7 +26,7 @@ type Store = {
 
 export const useStore = create<Store>((set, get) => ({
   started: false,
-  gameOver: true,
+  gameOver: false,
   time: 0,
   lifes: 3,
   lastHit: 0,
