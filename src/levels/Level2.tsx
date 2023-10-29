@@ -6,12 +6,20 @@ import Paddle from "@components/Paddle";
 import { Sensor } from "@components/Sensor";
 import { BrickLine } from "@components/BrickLine";
 import { Platform } from "@components/Platform";
+import { Fog } from "@components/Fog";
 
 export default function Level2() {
+  const currentLevel = useStore((state) => state.level);
   const setLevel = useStore((state) => state.setLevel);
 
   return (
     <group position={[0, 27.5, 0]}>
+      {currentLevel < 2 && (
+        <Fog length={28} width={24} position={[0, 12.4, 1]} />
+      )}
+
+      <Background length={26.1} width={25} position={[0, 12.7, -5]} />
+
       <Sensor
         position={[0, 2, 0]}
         length={6}
@@ -20,10 +28,16 @@ export default function Level2() {
           setLevel(2);
         }}
       />
+      <Sensor
+        position={[0, 23, 0]}
+        length={6}
+        width={0.5}
+        onEnter={() => {
+          setLevel(2);
+        }}
+      />
 
       <Paddle name="paddle-2" position={[0, 2, 0]} maxDrift={10} />
-
-      <Background length={26.1} width={23.5} position={[0, 12, -5]} />
 
       <Wall rotation={0} position={[-9, 0, 0]} />
       <Wall rotation={0} position={[9, 0, 0]} />

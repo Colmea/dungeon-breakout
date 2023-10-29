@@ -8,24 +8,52 @@ import { Physics } from "@react-three/rapier";
 import { useEffect } from "react";
 import useSound from "use-sound";
 
+import CONFIG from "@/config";
+import { useStore } from "@/store";
 import Game from "@/Game";
 import Hud from "@/ui/Hud";
+import LEVELS from "@/levels";
 import soundtrack from "@assets/soundtracks/soundtrack-001.mp3";
-import { useStore } from "@/store";
+// import soundtrackBoss from "@assets/soundtracks/soundtrack-boss.mp3";
 
 const App = () => {
   const hasGameStarted = useStore((state) => state.started);
+  const currentLevel = useStore((state) => state.level);
+  const isBossLevel = LEVELS[currentLevel].isBossLevel;
 
-  const [playSoundtrack] = useSound(soundtrack, {
-    volume: 0.5,
+  const [playSoundtrack, { sound: soundtrackSound }] = useSound(soundtrack, {
+    volume: 0,
     loop: true,
   });
+  // const [playSoundtrackBoss, { sound: sountrackBossSound }] = useSound(
+  //   soundtrackBoss,
+  //   {
+  //     volume: 0,
+  //     loop: true,
+  //   }
+  // );
 
-  useEffect(() => {
-    if (hasGameStarted) {
-      playSoundtrack();
-    }
-  }, [hasGameStarted]);
+  // useEffect(() => {
+  //   if (hasGameStarted && soundtrackSound) {
+  //     playSoundtrack();
+  //     playSoundtrackBoss();
+
+  //     // console.log("soundtrack", soundtrackSound);
+  //     // soundtrackSound.fade(0, 0.5, 1000);
+  //   }
+  // }, [hasGameStarted, playSoundtrack, soundtrackSound]);
+
+  // useEffect(() => {
+  //   if (!soundtrackSound || !sountrackBossSound) return;
+
+  //   if (isBossLevel) {
+  //     soundtrackSound.fade(0.5, 0, 1000);
+  //     sountrackBossSound.fade(0, 0.5, 1000);
+  //   } else {
+  //     soundtrackSound.fade(0, 0.5, 1000);
+  //     sountrackBossSound.fade(0.5, 0, 1000);
+  //   }
+  // }, [isBossLevel, soundtrackSound, sountrackBossSound]);
 
   return (
     <>
@@ -61,7 +89,7 @@ const App = () => {
           </AccumulativeShadows>
 
           <CameraControl />
-          <Physics gravity={[0, 0, 0]}>
+          <Physics debug={CONFIG.DEBUG} gravity={[0, 0, 0]}>
             <Game />
           </Physics>
         </Canvas>
