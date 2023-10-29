@@ -14,7 +14,7 @@ import Game from "@/Game";
 import Hud from "@/ui/Hud";
 import LEVELS from "@/levels";
 import soundtrack from "@assets/soundtracks/soundtrack-001.mp3";
-// import soundtrackBoss from "@assets/soundtracks/soundtrack-boss.mp3";
+import soundtrackBoss from "@assets/soundtracks/soundtrack-boss.mp3";
 
 const App = () => {
   const hasGameStarted = useStore((state) => state.started);
@@ -25,35 +25,35 @@ const App = () => {
     volume: 0,
     loop: true,
   });
-  // const [playSoundtrackBoss, { sound: sountrackBossSound }] = useSound(
-  //   soundtrackBoss,
-  //   {
-  //     volume: 0,
-  //     loop: true,
-  //   }
-  // );
+  const [playSoundtrackBoss, { sound: sountrackBossSound }] = useSound(
+    soundtrackBoss,
+    {
+      volume: 0,
+      loop: true,
+    }
+  );
 
-  // useEffect(() => {
-  //   if (hasGameStarted && soundtrackSound) {
-  //     playSoundtrack();
-  //     playSoundtrackBoss();
+  useEffect(() => {
+    if (hasGameStarted && soundtrackSound) {
+      playSoundtrack();
+      playSoundtrackBoss();
 
-  //     // console.log("soundtrack", soundtrackSound);
-  //     // soundtrackSound.fade(0, 0.5, 1000);
-  //   }
-  // }, [hasGameStarted, playSoundtrack, soundtrackSound]);
+      // console.log("soundtrack", soundtrackSound);
+      // soundtrackSound.fade(0, 0.5, 1000);
+    }
+  }, [hasGameStarted, playSoundtrack, playSoundtrackBoss, soundtrackSound]);
 
-  // useEffect(() => {
-  //   if (!soundtrackSound || !sountrackBossSound) return;
+  useEffect(() => {
+    if (!soundtrackSound || !sountrackBossSound) return;
 
-  //   if (isBossLevel) {
-  //     soundtrackSound.fade(0.5, 0, 1000);
-  //     sountrackBossSound.fade(0, 0.5, 1000);
-  //   } else {
-  //     soundtrackSound.fade(0, 0.5, 1000);
-  //     sountrackBossSound.fade(0.5, 0, 1000);
-  //   }
-  // }, [isBossLevel, soundtrackSound, sountrackBossSound]);
+    if (isBossLevel) {
+      soundtrackSound.fade(0.5, 0, 1000);
+      sountrackBossSound.fade(0, 0.5, 1000);
+    } else {
+      soundtrackSound.fade(0, 0.5, 1000);
+      sountrackBossSound.fade(0.5, 0, 1000);
+    }
+  }, [isBossLevel, soundtrackSound, sountrackBossSound]);
 
   return (
     <>

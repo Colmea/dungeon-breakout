@@ -1,6 +1,6 @@
 import panelBg from "@assets/ui/panel-bg.png";
 
-export default function Panel({ children }) {
+export default function Panel({ children }: { children: React.ReactNode }) {
   return (
     <div
       style={{

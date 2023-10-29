@@ -1,4 +1,4 @@
-import CONFIG from "@/Config";
+import CONFIG from "@/config";
 import { degToRad } from "@/utils";
 import { useTexture } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";

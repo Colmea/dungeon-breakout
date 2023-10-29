@@ -1,11 +1,9 @@
 import { useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
-import useSound from "use-sound";
 
 import Ball from "@components/Ball";
 import LEVELS from "@/levels";
 import { useStore } from "@/store";
-import soundtrack from "@assets/soundtracks/soundtrack.ogg";
 
 export default function Game() {
   const { camera } = useThree();

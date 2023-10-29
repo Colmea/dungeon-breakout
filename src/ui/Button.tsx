@@ -1,4 +1,3 @@
-import { MouseEventHandler } from "react";
 import { Image } from "./Button.style";
 import buttonPlay from "@assets/ui/play-btn.png";
 
