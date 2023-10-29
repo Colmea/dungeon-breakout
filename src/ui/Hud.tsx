@@ -65,17 +65,19 @@ export default function Hud() {
                 padding: 3,
               }}
             >
-              Press <strong>Space</strong> to use a new ball <br /> (you only
-              have 5 !)
+              Watch out for <strong>wooden stakes</strong>
             </p>
-            <p
-              style={{
-                backgroundColor: "rgba(206, 117, 0, 0.1)",
-                borderRadius: 5,
-                padding: 3,
-              }}
-            >
-              <strong>Click</strong> to launch the ball
+
+            <p style={{ fontSize: "0.8em", marginTop: 60 }}>
+              Made by{" "}
+              <a
+                href="https://twitter.com/Colmeo"
+                target="_blank"
+                style={{ color: "#1C9BEF" }}
+              >
+                @Colmeo
+              </a>{" "}
+              for react-jam 2023
             </p>
 
             {/* <button onClick={() => startGame()}>sdf</button> */}
