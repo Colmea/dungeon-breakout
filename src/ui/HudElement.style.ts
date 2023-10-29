@@ -12,8 +12,9 @@ export const HudElementContainer = styled.div<{ $blink?: boolean }>`
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 25px;
-  color: rgba(255, 255, 255, 0.8);
+  font-size: 28px;
+  font-family: Pixelify Sans;
+  color: rgba(255, 255, 255, 0.7);
   animation: ${({ $blink }) => ($blink ? "blink 1s linear" : "none")};
 
   @keyframes blink {

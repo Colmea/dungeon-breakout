@@ -5,16 +5,17 @@ import LEVELS from "../levels";
 import BossLife from "./BossLife";
 import HudElement from "./HudElement";
 import Button from "@/ui/Button";
-import Panel from "@/ui/Panel";
-import logo from "@assets/logo.png";
 import diamondAsset from "@assets/diamond.png";
 import ballAsset from "@assets/ball.png";
+import PanelStart from "./PanelStart";
+import PanelFinish from "./PanelFinish";
 
 export default function Hud() {
   const lifes = useStore((state) => state.lifes);
   const diamonds = useStore((state) => state.diamonds);
   const currentLevel = useStore((state) => state.level);
   const hasGameStarted = useStore((state) => state.started);
+  const isGameOver = useStore((state) => state.gameOver);
 
   const startGame = useStore((state) => state.startGame);
 
@@ -49,45 +50,8 @@ export default function Hud() {
             backgroundColor: "rgba(0,0,0,0.6)",
           }}
         >
-          <Panel>
-            <div style={{ marginTop: -150 }}>
-              <img src={logo} style={{ width: 220 }} />
-            </div>
-
-            <p
-              style={{
-                backgroundColor: "rgba(206, 117, 0, 0.1)",
-                borderRadius: 5,
-                padding: 3,
-              }}
-            >
-              <strong>Move</strong> the paddle with your <strong>mouse</strong>{" "}
-              to break the bricks
-            </p>
-            <p
-              style={{
-                backgroundColor: "rgba(206, 117, 0, 0.1)",
-                borderRadius: 5,
-                padding: 3,
-              }}
-            >
-              Watch out for <strong>wooden stakes</strong>
-            </p>
-
-            <p style={{ fontSize: "0.8em", marginTop: 60 }}>
-              Made by{" "}
-              <a
-                href="https://twitter.com/Colmeo"
-                target="_blank"
-                style={{ color: "#1C9BEF" }}
-              >
-                @Colmeo
-              </a>{" "}
-              for react-jam 2023
-            </p>
-
-            {/* <button onClick={() => startGame()}>sdf</button> */}
-          </Panel>
+          {isGameOver && <PanelFinish />}
+          {!isGameOver && <PanelStart />}
           <div style={{ display: "flex", justifyContent: "center" }}>
             <Button onClick={() => startGame()} />
           </div>

@@ -22,6 +22,7 @@ const clawMoveProps: Omit<MoverProps, "ref"> = {
 
 export function Crab({ position }: { position: [number, number, number] }) {
   const hitBoss = useStore((state) => state.hitBoss);
+  const finishGame = useStore((state) => state.finishGame);
 
   const refCrab = useRef<THREE.Group>(null);
 
@@ -65,6 +66,7 @@ export function Crab({ position }: { position: [number, number, number] }) {
     onHit: hitBoss,
     onDestruction: () => {
       setIsBodyAlive(false);
+      finishGame();
     },
   });
 
