@@ -8,6 +8,7 @@ import logo from "@assets/logo.png";
 import BossLife from "./BossLife";
 
 export default function Hud() {
+  const diamonds = useStore((state) => state.diamonds);
   const currentLevel = useStore((state) => state.level);
   const hasGameStarted = useStore((state) => state.started);
   const hasKey = useStore((state) => state.hasKey);
@@ -92,6 +93,7 @@ export default function Hud() {
       <div style={{ display: "flex", gap: 20 }}>
         <div>Level: {currentLevel}</div>
         <div>Has Key: {JSON.stringify(hasKey)}</div>
+        <div>Diamonds: {diamonds}</div>
       </div>
       {currentLevel === 5 && (
         <div

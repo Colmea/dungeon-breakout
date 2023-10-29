@@ -6,6 +6,7 @@ import Paddle from "@components/Paddle";
 import { Sensor } from "@components/Sensor";
 import { BrickLine } from "@components/BrickLine";
 import { Platform } from "@components/Platform";
+import { Diamond } from "@components/Diamond";
 
 export default function Level2() {
   const setLevel = useStore((state) => state.setLevel);
@@ -49,6 +50,20 @@ export default function Level2() {
       <BrickLine position={[-9, 14, 0]} quantity={8} />
 
       <Platform position={[-3.5, 20, 0]} rotation={180} />
+
+      <Diamond position={[-12, 4, 0]} />
+      <Diamond position={[12, 4, 0]} />
+
+      <Diamond position={[-2, 21.5, 0]} />
+      <Diamond position={[0, 21.5, 0]} />
+
+      <Diamond position={[-12, 21, 0]} />
+      <Diamond position={[-12, 19, 0]} />
+      <Diamond position={[-12, 17, 0]} />
+
+      <Diamond position={[12, 21, 0]} />
+      <Diamond position={[12, 19, 0]} />
+      <Diamond position={[12, 17, 0]} />
     </group>
   );
 }

@@ -9,6 +9,7 @@ import { Platform } from "@components/Platform";
 import { Button } from "@components/Button";
 import { useState } from "react";
 import { Sensor } from "@/components/Sensor";
+import { Diamond } from "@components/Diamond";
 
 export default function Level3() {
   const hasKey = useStore((state) => state.hasKey);
@@ -57,11 +58,11 @@ export default function Level3() {
       <Door isLocked={!hasKey} position={[0, 23.8, 0]} />
 
       <BrickLine position={[-19.5, 14, 0]} quantity={5} />
-      <BrickLine position={[-18, 16, 0]} quantity={5} />
+      <BrickLine position={[-16, 16, 0]} quantity={5} />
       <BrickLine position={[-19.5, 18, 0]} quantity={5} />
 
       <BrickLine position={[0.5, 14, 0]} quantity={5} />
-      <BrickLine position={[0, 16, 0]} quantity={5} />
+      <BrickLine position={[-3, 16, 0]} quantity={5} />
       <BrickLine position={[0.5, 18, 0]} quantity={5} />
 
       {!isDoorOpen && (
@@ -79,6 +80,19 @@ export default function Level3() {
         position={[-11.5, 23, 0]}
       />
       <Key position={[-17, 29, 0]} onPickup={pickupKey} />
+
+      <Diamond position={[-19.5, 16.2, 0]} />
+      <Diamond position={[10.5, 16.2, 0]} />
+
+      <Diamond position={[-6.5, 13.5, 0]} />
+      <Diamond position={[-4.5, 13.5, 0]} />
+      <Diamond position={[-2.5, 13.5, 0]} />
+      <Diamond position={[-6.5, 18.5, 0]} />
+      <Diamond position={[-4.5, 18.5, 0]} />
+      <Diamond position={[-2.5, 18.5, 0]} />
+
+      <Diamond position={[-20, 30.5, 0]} />
+      <Diamond position={[-14, 30.5, 0]} />
     </group>
   );
 }

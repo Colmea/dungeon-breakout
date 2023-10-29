@@ -1,6 +1,8 @@
 import { useFrame, useThree } from "@react-three/fiber";
+import { Stats } from "@react-three/drei";
 import * as THREE from "three";
 
+import CONFIG from "@/config";
 import Ball from "@components/Ball";
 import LEVELS from "@/levels";
 import { useStore } from "@/store";
@@ -26,6 +28,7 @@ export default function Game() {
 
   return (
     <>
+      {CONFIG.DEBUG && <Stats showPanel={0} className="stats" />}
       {Object.values(LEVELS).map((level) => {
         const Environment = level.Environment;
         return <Environment key={level.name} />;

@@ -5,6 +5,7 @@ import Paddle from "@components/Paddle";
 import { Crab } from "@components/Crab";
 import { BrickLine } from "@components/BrickLine";
 import { Sensor } from "@components/Sensor";
+import { Diamond } from "@components/Diamond";
 
 export default function Level5() {
   const setLevel = useStore((state) => state.setLevel);
@@ -50,6 +51,21 @@ export default function Level5() {
 
       <BrickLine position={[0, 27, 0]} quantity={4} />
       <BrickLine position={[2, 25, 0]} quantity={4} />
+
+      <Diamond position={[-11, 16, 0]} />
+      <Diamond position={[-13, 18, 0]} />
+      <Diamond position={[2, 16, 0]} />
+      <Diamond position={[4, 18, 0]} />
+
+      <Diamond position={[-19.5, 30, 0]} />
+      <Diamond position={[11, 30, 0]} />
+
+      <Diamond position={[-19.5, 22, 0]} />
+      <Diamond position={[-19.5, 20, 0]} />
+      <Diamond position={[-19.5, 18, 0]} />
+      <Diamond position={[11, 22, 0]} />
+      <Diamond position={[11, 20, 0]} />
+      <Diamond position={[11, 18, 0]} />
     </group>
   );
 }

@@ -5,6 +5,7 @@ import { Door } from "@components/Door";
 import { Background } from "@components/Background";
 import Paddle from "@components/Paddle";
 import { Sensor } from "@/components/Sensor";
+import { Diamond } from "@components/Diamond";
 
 export default function Level1() {
   const setLevel = useStore((state) => state.setLevel);
@@ -37,6 +38,10 @@ export default function Level1() {
       <Brick position={[-2.6, 17, 0]} />
       <Brick position={[0, 17, 0]} />
       <Brick position={[2.6, 17, 0]} />
+
+      <Diamond position={[-2.5, 20, 0]} />
+      <Diamond position={[0, 20, 0]} />
+      <Diamond position={[2.5, 20, 0]} />
 
       <Door position={[0, 27.5, 0]} />
     </group>
