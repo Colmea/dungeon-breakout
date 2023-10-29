@@ -9,9 +9,11 @@ import { Platform } from "@components/Platform";
 import { Button } from "@components/Button";
 import { useState } from "react";
 import { Sensor } from "@/components/Sensor";
+import { Fog } from "@components/Fog";
 
-export default function Level2() {
+export default function Level3() {
   const hasKey = useStore((state) => state.hasKey);
+  const currentLevel = useStore((state) => state.level);
   const setLevel = useStore((state) => state.setLevel);
   const pickupKey = useStore((state) => state.pickupKey);
 
@@ -19,6 +21,13 @@ export default function Level2() {
 
   return (
     <group position={[0, 52, 0]}>
+      {currentLevel < 3 && (
+        <>
+          <Fog length={36} width={25} position={[-4, 12, 1]} />
+          <Fog length={10} width={9} position={[-17, 28, 1]} />
+        </>
+      )}
+
       <Sensor
         position={[0, 2, 0]}
         length={6}
@@ -27,6 +36,15 @@ export default function Level2() {
           setLevel(3);
         }}
       />
+      <Sensor
+        position={[0, 23, 0]}
+        length={6}
+        width={0.5}
+        onEnter={() => {
+          setLevel(3);
+        }}
+      />
+
       <Paddle position={[0, 2, 0]} maxDrift={18} />
 
       <Background length={35} width={24} position={[-4, 12, -5]} />

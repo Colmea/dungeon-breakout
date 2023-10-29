@@ -21,8 +21,8 @@
     "noFallthroughCasesInSwitch": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"],
       "@components/*": ["src/components/*"],
+      "@/*": ["src/*"],
       "@assets/*": ["public/assets/*"],
       "use-sound": ["./types/"]
     }

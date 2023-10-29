@@ -7,6 +7,7 @@ import {
 import { Box, useTexture } from "@react-three/drei";
 import * as THREE from "three";
 
+import CONFIG from "@/config";
 import { degToRad } from "@/utils";
 import { useRef, useState } from "react";
 import useMover, { MoverProps } from "@/hooks/useMover";
@@ -65,14 +66,14 @@ export function Crab({ position }: { position: [number, number, number] }) {
 
   const { onCollide: onLeftClawCollide } = useDestructible({
     meshRef: refClawLeftMesh,
-    health: 1,
+    health: CONFIG.BOSS_CLAW_HEALTH,
     onDestruction: () => {
       setIsLeftClawAlive(false);
     },
   });
   const { onCollide: onRightClawCollide } = useDestructible({
     meshRef: refClawRightMesh,
-    health: 1,
+    health: CONFIG.BOSS_CLAW_HEALTH,
     onDestruction: () => {
       setRightClawAlive(false);
     },
@@ -143,7 +144,7 @@ export function Crab({ position }: { position: [number, number, number] }) {
             collisionGroups={interactionGroups(6, [0])}
             onCollisionEnter={onRightClawCollide}
           />
-          <Box args={[3.5, 2, 3.5]}>
+          <Box ref={refClawRightMesh} args={[3.5, 2, 3.5]}>
             <meshPhongMaterial {...textureClawRight} opacity={1} transparent />
           </Box>
         </RigidBody>
