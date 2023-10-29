@@ -37,7 +37,8 @@ export default function Level2() {
       <Paddle
         name="paddle-2"
         position={[0, currentLevel === 2 ? 3 : 2.5, 0]}
-        maxDrift={10}
+        maxDriftLeft={10.5}
+        maxDriftRight={10.5}
       />
 
       <Wall rotation={0} position={[-9, 0, 0]} />

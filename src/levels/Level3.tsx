@@ -39,7 +39,11 @@ export default function Level3() {
         }}
       />
 
-      <Paddle position={[0, currentLevel === 3 ? 3 : 2.5, 0]} maxDrift={18} />
+      <Paddle
+        position={[0, currentLevel === 3 ? 3 : 2.5, 0]}
+        maxDriftLeft={18.5}
+        maxDriftRight={10.5}
+      />
 
       <Background length={35} width={24} position={[-4, 12, -5]} />
       <Background length={9} width={8} position={[-17, 28, -5]} />

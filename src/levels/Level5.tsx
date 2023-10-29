@@ -28,7 +28,8 @@ export default function Level5() {
       <Paddle
         name="paddle-2"
         position={[0, currentLevel === 5 ? 3 : 2, 0]}
-        maxDrift={15}
+        maxDriftLeft={18}
+        maxDriftRight={10.5}
       />
 
       <Wall rotation={0} position={[-18, 0, 0]} length={2} />

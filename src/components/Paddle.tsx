@@ -18,7 +18,8 @@ type Props = {
   name?: string;
   position: [number, number, number];
   rotation?: number;
-  maxDrift: number;
+  maxDriftLeft?: number;
+  maxDriftRight?: number;
   hasRotation?: boolean;
 };
 
@@ -26,7 +27,8 @@ export default function Paddle({
   name,
   position,
   rotation,
-  maxDrift,
+  maxDriftLeft = 1,
+  maxDriftRight = 1,
   hasRotation,
 }: Props) {
   const ref = useRef<RapierRigidBody>(null);
@@ -44,11 +46,11 @@ export default function Paddle({
     const currentTranslation = ref.current.translation();
     let newX = (pointer.x * viewport.width) / 2;
 
-    // ensure the paddle doesn't drift too far
-    if (newX > maxDrift) {
-      newX = maxDrift;
-    } else if (newX < -maxDrift) {
-      newX = -maxDrift;
+    // ensure the paddle doesn't drift too far left or right
+    if (maxDriftLeft && newX < -maxDriftLeft) {
+      newX = -maxDriftLeft;
+    } else if (maxDriftRight && newX > maxDriftRight) {
+      newX = maxDriftRight;
     }
 
     ref.current.setTranslation(
