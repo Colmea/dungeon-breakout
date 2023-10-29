@@ -2,16 +2,20 @@ import { useStore } from "../store";
 import { useState, useEffect } from "react";
 import { useSpring, animated } from "@react-spring/web";
 import LEVELS from "../levels";
-import Panel from "@/ui/Panel";
-import Button from "@/ui/Button";
-import logo from "@assets/logo.png";
 import BossLife from "./BossLife";
+import HudElement from "./HudElement";
+import Button from "@/ui/Button";
+import Panel from "@/ui/Panel";
+import logo from "@assets/logo.png";
+import diamondAsset from "@assets/diamond.png";
+import ballAsset from "@assets/ball.png";
 
 export default function Hud() {
+  const lifes = useStore((state) => state.lifes);
   const diamonds = useStore((state) => state.diamonds);
   const currentLevel = useStore((state) => state.level);
   const hasGameStarted = useStore((state) => state.started);
-  const hasKey = useStore((state) => state.hasKey);
+
   const startGame = useStore((state) => state.startGame);
 
   const [showLevel, setShowLevel] = useState(false);
@@ -90,10 +94,19 @@ export default function Hud() {
         </div>
       )}
 
-      <div style={{ display: "flex", gap: 20 }}>
-        <div>Level: {currentLevel}</div>
-        <div>Has Key: {JSON.stringify(hasKey)}</div>
-        <div>Diamonds: {diamonds}</div>
+      <div style={{ position: "absolute", width: "100%", zIndex: 100 }}>
+        <div
+          style={{
+            margin: "auto",
+            maxWidth: 1000,
+            display: "flex",
+            flexDirection: "row",
+            gap: 10,
+          }}
+        >
+          <HudElement icon={ballAsset} iconSize={28} text={lifes} />
+          <HudElement icon={diamondAsset} text={diamonds} />
+        </div>
       </div>
       {currentLevel === 5 && (
         <div
@@ -103,7 +116,7 @@ export default function Hud() {
             justifyContent: "center",
             width: "100%",
             zIndex: 1,
-            top: 55,
+            top: 0,
           }}
         >
           <BossLife />
