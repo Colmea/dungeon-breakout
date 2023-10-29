@@ -2,6 +2,9 @@ import { useFrame } from "@react-three/fiber";
 import { CollisionEnterPayload } from "@react-three/rapier";
 import { useEffect, useState } from "react";
 import * as THREE from "three";
+import useSound from "use-sound";
+
+import stabFx from "@assets/sounds/door-destruct.mp3";
 
 type Options = {
   isEnabled?: boolean;
@@ -19,8 +22,13 @@ const useDestructible = ({
   const [isHit, setIsHit] = useState(false);
   const [currentHealth, setCurrentHealth] = useState(health);
 
+  const [playStabFx] = useSound(stabFx, {
+    volume: 1,
+  });
+
   const onCollide = ({ other }: CollisionEnterPayload) => {
-    console.log("ENABLED ?", isEnabled);
+    playStabFx();
+
     if (isEnabled && other.rigidBodyObject?.name === "ball") {
       console.log("HIIIT");
       setCurrentHealth((prev) => prev - 1);

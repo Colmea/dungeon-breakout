@@ -6,18 +6,12 @@ import Paddle from "@components/Paddle";
 import { Sensor } from "@components/Sensor";
 import { BrickLine } from "@components/BrickLine";
 import { Platform } from "@components/Platform";
-import { Fog } from "@components/Fog";
 
 export default function Level2() {
-  const currentLevel = useStore((state) => state.level);
   const setLevel = useStore((state) => state.setLevel);
 
   return (
     <group position={[0, 27.5, 0]}>
-      {currentLevel < 2 && (
-        <Fog length={28} width={24} position={[0, 12.4, 1]} />
-      )}
-
       <Background length={26.1} width={25} position={[0, 12.7, -5]} />
 
       <Sensor
