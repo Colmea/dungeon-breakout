@@ -27,11 +27,6 @@ export default function Game() {
   return (
     <>
       {Object.values(LEVELS).map((level) => {
-        if (
-          level.level !== 1 &&
-          (level.level < currentLevel - 1 || level.level > currentLevel + 1)
-        )
-          return;
         const Environment = level.Environment;
         return <Environment key={level.name} />;
       })}

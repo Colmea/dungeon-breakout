@@ -27,10 +27,9 @@ const useDestructible = ({
   });
 
   const onCollide = ({ other }: CollisionEnterPayload) => {
-    playStabFx();
-
     if (isEnabled && other.rigidBodyObject?.name === "ball") {
-      console.log("HIIIT");
+      playStabFx();
+
       setCurrentHealth((prev) => prev - 1);
       setIsHit(true);
     }

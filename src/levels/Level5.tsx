@@ -42,6 +42,10 @@ export default function Level5() {
       <BrickLine position={[-17, 10, 0]} quantity={4} />
       <BrickLine position={[-18, 12, 0]} quantity={4} />
 
+      <BrickLine position={[-4.2, 10.5, 0]} />
+      <BrickLine position={[-6, 13, 0]} />
+      <BrickLine position={[-2.5, 13, 0]} />
+
       <BrickLine position={[0, 10, 0]} quantity={4} />
       <BrickLine position={[2, 12, 0]} quantity={4} />
 
