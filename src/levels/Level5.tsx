@@ -24,7 +24,7 @@ export default function Level5() {
 
       <Background length={34} width={32} position={[-4, 16, -1]} />
 
-      <Paddle name="paddle-2" position={[0, 2, 0]} maxDrift={10} />
+      <Paddle name="paddle-2" position={[0, 2, 0]} maxDrift={15} />
 
       <Wall rotation={0} position={[-18, 0, 0]} length={2} />
       <Wall rotation={0} position={[9, 0, 0]} length={1} />
