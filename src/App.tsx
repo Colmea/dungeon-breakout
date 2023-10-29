@@ -13,6 +13,7 @@ import { useStore } from "@/store";
 import Game from "@/Game";
 import Hud from "@/ui/Hud";
 import LEVELS from "@/levels";
+import soundtrackCredit from "@assets/soundtracks/soundtrack-credit.mp3";
 import soundtrack from "@assets/soundtracks/soundtrack-001.mp3";
 import soundtrackBoss from "@assets/soundtracks/soundtrack-boss.mp3";
 
@@ -20,6 +21,14 @@ const App = () => {
   const hasGameStarted = useStore((state) => state.started);
   const currentLevel = useStore((state) => state.level);
   const isBossLevel = LEVELS[currentLevel].isBossLevel;
+
+  const [
+    playSoundtrackCredit,
+    { sound: soundtrackCreditSound, stop: stopSoundtrackCredit },
+  ] = useSound(soundtrackCredit, {
+    volume: 1,
+    loop: true,
+  });
 
   const [playSoundtrack, { sound: soundtrackSound, stop: stopSoundtrack }] =
     useSound(soundtrack, {
@@ -35,7 +44,10 @@ const App = () => {
   });
 
   useEffect(() => {
-    if (hasGameStarted && soundtrackSound) {
+    if (!hasGameStarted) {
+      stopSoundtrack();
+      stopSoundtrackBoss();
+    } else if (hasGameStarted && soundtrackSound) {
       stopSoundtrack();
       stopSoundtrackBoss();
       playSoundtrack();
@@ -51,16 +63,33 @@ const App = () => {
   ]);
 
   useEffect(() => {
-    if (!soundtrackSound || !sountrackBossSound) return;
+    if (!soundtrackSound || !sountrackBossSound || !soundtrackCredit) return;
 
-    if (isBossLevel) {
+    if (!hasGameStarted) {
+      soundtrackSound.fade(0.5, 0, 1000);
+      sountrackBossSound.fade(0.5, 0, 1000);
+    } else if (isBossLevel) {
       soundtrackSound.fade(0.5, 0, 1000);
       sountrackBossSound.fade(0, 0.5, 1000);
     } else {
       soundtrackSound.fade(0, 0.5, 1000);
       sountrackBossSound.fade(0.5, 0, 1000);
     }
-  }, [isBossLevel, soundtrackSound, sountrackBossSound]);
+  }, [
+    hasGameStarted,
+    isBossLevel,
+    soundtrackCreditSound,
+    soundtrackSound,
+    sountrackBossSound,
+  ]);
+
+  useEffect(() => {
+    if (!hasGameStarted) {
+      playSoundtrackCredit();
+    } else {
+      stopSoundtrackCredit();
+    }
+  }, [hasGameStarted, playSoundtrackCredit, stopSoundtrackCredit]);
 
   return (
     <>
