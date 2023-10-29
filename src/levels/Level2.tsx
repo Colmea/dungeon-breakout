@@ -7,8 +7,10 @@ import { Sensor } from "@components/Sensor";
 import { BrickLine } from "@components/BrickLine";
 import { Platform } from "@components/Platform";
 import { Diamond } from "@components/Diamond";
+import { Spikes } from "@components/Spikes";
 
 export default function Level2() {
+  const currentLevel = useStore((state) => state.level);
   const setLevel = useStore((state) => state.setLevel);
 
   return (
@@ -32,7 +34,11 @@ export default function Level2() {
         }}
       />
 
-      <Paddle name="paddle-2" position={[0, 2, 0]} maxDrift={10} />
+      <Paddle
+        name="paddle-2"
+        position={[0, currentLevel === 2 ? 3 : 2.5, 0]}
+        maxDrift={10}
+      />
 
       <Wall rotation={0} position={[-9, 0, 0]} />
       <Wall rotation={0} position={[9, 0, 0]} />
@@ -64,6 +70,11 @@ export default function Level2() {
       <Diamond position={[12, 21, 0]} />
       <Diamond position={[12, 19, 0]} />
       <Diamond position={[12, 17, 0]} />
+
+      <Spikes position={[-10.5, 1.3, -0.5]} />
+      <Spikes position={[-7, 1.3, -0.5]} />
+      <Spikes position={[7, 1.3, -0.5]} />
+      <Spikes position={[10.5, 1.3, -0.5]} />
     </group>
   );
 }

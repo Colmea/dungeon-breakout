@@ -6,13 +6,15 @@ import {
 } from "@react-three/rapier";
 import { Box, useTexture } from "@react-three/drei";
 import * as THREE from "three";
+import useSound from "use-sound";
+import { useRef, useState } from "react";
 
 import CONFIG from "@/config";
 import { degToRad } from "@/utils";
-import { useRef, useState } from "react";
 import useMover, { MoverProps } from "@/hooks/useMover";
 import useDestructible from "@/hooks/useDestructible";
 import { useStore } from "@/store";
+import victoryFx from "@assets/sounds/victory.mp3";
 
 const clawMoveProps: Omit<MoverProps, "ref"> = {
   direction: "x",
@@ -37,6 +39,10 @@ export function Crab({ position }: { position: [number, number, number] }) {
   const [isRightClawAlive, setRightClawAlive] = useState(true);
   const refClawRight = useRef<RapierRigidBody>(null);
   const refClawRightMesh = useRef<THREE.Mesh>(null);
+
+  const [playVictoryFx] = useSound(victoryFx, {
+    volume: 1.5,
+  });
 
   useMover({
     isEnabled: isBodyAlive,
@@ -66,7 +72,11 @@ export function Crab({ position }: { position: [number, number, number] }) {
     onHit: hitBoss,
     onDestruction: () => {
       setIsBodyAlive(false);
-      finishGame();
+      playVictoryFx();
+
+      setTimeout(() => {
+        finishGame();
+      }, 3000);
     },
   });
 

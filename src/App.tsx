@@ -21,27 +21,34 @@ const App = () => {
   const currentLevel = useStore((state) => state.level);
   const isBossLevel = LEVELS[currentLevel].isBossLevel;
 
-  const [playSoundtrack, { sound: soundtrackSound }] = useSound(soundtrack, {
+  const [playSoundtrack, { sound: soundtrackSound, stop: stopSoundtrack }] =
+    useSound(soundtrack, {
+      volume: 0,
+      loop: true,
+    });
+  const [
+    playSoundtrackBoss,
+    { sound: sountrackBossSound, stop: stopSoundtrackBoss },
+  ] = useSound(soundtrackBoss, {
     volume: 0,
     loop: true,
   });
-  const [playSoundtrackBoss, { sound: sountrackBossSound }] = useSound(
-    soundtrackBoss,
-    {
-      volume: 0,
-      loop: true,
-    }
-  );
 
   useEffect(() => {
     if (hasGameStarted && soundtrackSound) {
+      stopSoundtrack();
+      stopSoundtrackBoss();
       playSoundtrack();
       playSoundtrackBoss();
-
-      // console.log("soundtrack", soundtrackSound);
-      // soundtrackSound.fade(0, 0.5, 1000);
     }
-  }, [hasGameStarted, playSoundtrack, playSoundtrackBoss, soundtrackSound]);
+  }, [
+    hasGameStarted,
+    playSoundtrack,
+    playSoundtrackBoss,
+    soundtrackSound,
+    stopSoundtrack,
+    stopSoundtrackBoss,
+  ]);
 
   useEffect(() => {
     if (!soundtrackSound || !sountrackBossSound) return;

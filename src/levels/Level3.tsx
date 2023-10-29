@@ -10,10 +10,11 @@ import { Button } from "@components/Button";
 import { useState } from "react";
 import { Sensor } from "@/components/Sensor";
 import { Diamond } from "@components/Diamond";
+import { Spikes } from "@components/Spikes";
 
 export default function Level3() {
   const hasKey = useStore((state) => state.hasKey);
-
+  const currentLevel = useStore((state) => state.level);
   const setLevel = useStore((state) => state.setLevel);
   const pickupKey = useStore((state) => state.pickupKey);
 
@@ -38,7 +39,7 @@ export default function Level3() {
         }}
       />
 
-      <Paddle position={[0, 2, 0]} maxDrift={18} />
+      <Paddle position={[0, currentLevel === 3 ? 3 : 2.5, 0]} maxDrift={18} />
 
       <Background length={35} width={24} position={[-4, 12, -5]} />
       <Background length={9} width={8} position={[-17, 28, -5]} />
@@ -93,6 +94,13 @@ export default function Level3() {
 
       <Diamond position={[-20, 30.5, 0]} />
       <Diamond position={[-14, 30.5, 0]} />
+
+      <Spikes position={[-18, 1.3, -0.5]} />
+      <Spikes position={[-14.5, 1.3, -0.5]} />
+      <Spikes position={[-11, 1.3, -0.5]} />
+      <Spikes position={[-7.5, 1.3, -0.5]} />
+      <Spikes position={[7, 1.3, -0.5]} />
+      <Spikes position={[10.5, 1.3, -0.5]} />
     </group>
   );
 }

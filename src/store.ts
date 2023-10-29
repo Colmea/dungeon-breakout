@@ -9,6 +9,7 @@ type Store = {
   gameOver: boolean;
   time: number;
   lifes: number;
+  lastHit: number;
   diamonds: number;
   level: LevelKey;
   hasKey: boolean;
@@ -17,16 +18,18 @@ type Store = {
   setLevel: (newLevel: LevelKey) => void;
   startGame: () => void;
   increaseTime: () => void;
+  takeLife: () => void;
   pickupKey: () => void;
   hitBoss: () => void;
   finishGame: () => void;
 };
 
-export const useStore = create<Store>((set) => ({
+export const useStore = create<Store>((set, get) => ({
   started: false,
   gameOver: true,
   time: 0,
   lifes: 3,
+  lastHit: 0,
   diamonds: 0,
   level: 1,
   hasKey: false,
@@ -47,7 +50,15 @@ export const useStore = create<Store>((set) => ({
         CONFIG.BOSS_BODY_HEALTH,
     })),
   increaseTime: () => set((state) => ({ time: state.time + 1 })),
-  takeLife: () => set((state) => ({ lifes: state.lifes - 1 })),
+  takeLife: () => {
+    if (Date.now() > get().lastHit + CONFIG.BALL_INVINCIBLE_TIME * 1000) {
+      set((state) => ({ lifes: state.lifes - 1, lastHit: Date.now() }));
+
+      if (get().lifes <= 0) {
+        get().finishGame();
+      }
+    }
+  },
   collectDiamond: () => set((state) => ({ diamonds: state.diamonds + 1 })),
   setLevel: (newLevel: LevelKey) =>
     set(() => ({ level: newLevel, hasKey: false })),

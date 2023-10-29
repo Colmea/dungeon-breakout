@@ -41,7 +41,6 @@ export function Diamond({ position }: { position: Vector3 }) {
     [collectDiamond, playCollectFx]
   );
 
-  console.log("diamond render");
   return (
     <>
       {isAlive && (

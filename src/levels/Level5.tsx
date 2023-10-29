@@ -6,8 +6,10 @@ import { Crab } from "@components/Crab";
 import { BrickLine } from "@components/BrickLine";
 import { Sensor } from "@components/Sensor";
 import { Diamond } from "@components/Diamond";
+import { Spikes } from "@components/Spikes";
 
 export default function Level5() {
+  const currentLevel = useStore((state) => state.level);
   const setLevel = useStore((state) => state.setLevel);
 
   return (
@@ -23,7 +25,11 @@ export default function Level5() {
 
       <Background length={34} width={32} position={[-4, 16, -1]} />
 
-      <Paddle name="paddle-2" position={[0, 2, 0]} maxDrift={15} />
+      <Paddle
+        name="paddle-2"
+        position={[0, currentLevel === 5 ? 3 : 2, 0]}
+        maxDrift={15}
+      />
 
       <Wall rotation={0} position={[-18, 0, 0]} length={2} />
       <Wall rotation={0} position={[9, 0, 0]} length={1} />
@@ -66,6 +72,18 @@ export default function Level5() {
       <Diamond position={[11, 22, 0]} />
       <Diamond position={[11, 20, 0]} />
       <Diamond position={[11, 18, 0]} />
+
+      <Spikes position={[-18, 1.3, -0.5]} />
+      <Spikes position={[-14.5, 1.3, -0.5]} />
+      <Spikes position={[-11, 1.3, -0.5]} />
+      <Spikes position={[-7.5, 1.3, -0.5]} />
+      <Spikes position={[7, 1.3, -0.5]} />
+      <Spikes position={[10.5, 1.3, -0.5]} />
+
+      <Spikes position={[-19, 30.7, -0.5]} rotation={180} />
+      <Spikes position={[-15.5, 30.7, -0.5]} rotation={180} />
+      <Spikes position={[10, 30.7, -0.5]} rotation={180} />
+      <Spikes position={[6.5, 30.7, -0.5]} rotation={180} />
     </group>
   );
 }

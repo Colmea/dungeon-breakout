@@ -6,6 +6,7 @@ import { Background } from "@components/Background";
 import Paddle from "@components/Paddle";
 import { Sensor } from "@/components/Sensor";
 import { Diamond } from "@components/Diamond";
+import { Spikes } from "@components/Spikes";
 
 export default function Level1() {
   const setLevel = useStore((state) => state.setLevel);
@@ -24,6 +25,13 @@ export default function Level1() {
       <Paddle name="paddle-1" position={[0, 0, 0]} maxDrift={2} />
       <Background isDark length={50} width={250} position={[0, 50, -5]} />
       <Background length={10} width={39} position={[0, 9, -5]} />
+
+      <Spikes position={[-3, -9.2, -0.5]} />
+      <Spikes position={[0, -9.2, -0.5]} />
+      <Spikes position={[3, -9.2, -0.5]} />
+
+      <Wall rotation={0} position={[-1, -10.5, 0]} />
+      <Wall rotation={0} position={[1, -10.5, 0]} />
 
       <Wall rotation={-90} position={[-5, 24, 0]} length={5} />
       <Wall rotation={90} position={[5, -8, 0]} length={5} />
