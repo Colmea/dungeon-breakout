@@ -10,13 +10,15 @@ type Options = {
   isEnabled?: boolean;
   meshRef: React.MutableRefObject<THREE.Mesh | null>;
   health?: number;
-  onDestruction: () => void;
+  onHit?: () => void;
+  onDestruction?: () => void;
 };
 
 const useDestructible = ({
   isEnabled = true,
   meshRef,
   health = 1,
+  onHit,
   onDestruction,
 }: Options) => {
   const [isHit, setIsHit] = useState(false);
@@ -32,6 +34,7 @@ const useDestructible = ({
 
       setCurrentHealth((prev) => prev - 1);
       setIsHit(true);
+      onHit?.();
     }
   };
 
@@ -41,13 +44,13 @@ const useDestructible = ({
         setIsHit(false);
       }, 150);
     }
-  });
+  }, [isHit]);
 
   // Handle destruction
   useEffect(() => {
     if (currentHealth <= 0) {
       setTimeout(() => {
-        onDestruction();
+        onDestruction?.();
       }, 50);
     }
   });

@@ -1,6 +1,5 @@
 import { useStore } from "@/store";
 import { Wall } from "@components/Wall";
-import { Door } from "@components/Door";
 import { Background } from "@components/Background";
 import Paddle from "@components/Paddle";
 import { Crab } from "@components/Crab";
@@ -8,7 +7,6 @@ import { BrickLine } from "@components/BrickLine";
 import { Sensor } from "@components/Sensor";
 
 export default function Level5() {
-  const hasKey = useStore((state) => state.hasKey);
   const setLevel = useStore((state) => state.setLevel);
 
   return (
@@ -32,10 +30,8 @@ export default function Level5() {
       <Wall rotation={-90} position={[-21.5, 28, 0]} length={4} />
       <Wall rotation={90} position={[13, 4, 0]} length={4} />
 
-      <Wall rotation={-180} position={[8.5, 32, 0]} length={2} />
+      <Wall rotation={-180} position={[8.5, 32, 0]} length={4} />
       <Wall rotation={-180} position={[-17, 32, 0]} length={1} />
-
-      <Door isLocked={!hasKey} position={[-8.3, 31.9, 0]} />
 
       <Crab position={[-4.5, 20, 0]} />
 

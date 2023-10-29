@@ -5,6 +5,7 @@ import LEVELS from "../levels";
 import Panel from "@/ui/Panel";
 import Button from "@/ui/Button";
 import logo from "@assets/logo.png";
+import BossLife from "./BossLife";
 
 export default function Hud() {
   const currentLevel = useStore((state) => state.level);
@@ -87,12 +88,26 @@ export default function Hud() {
           </div>
         </div>
       )}
-      {
-        <div style={{ display: "flex", gap: 20 }}>
-          <div>Level: {currentLevel}</div>
-          <div>Has Key: {JSON.stringify(hasKey)}</div>
+
+      <div style={{ display: "flex", gap: 20 }}>
+        <div>Level: {currentLevel}</div>
+        <div>Has Key: {JSON.stringify(hasKey)}</div>
+      </div>
+      {currentLevel === 5 && (
+        <div
+          style={{
+            position: "absolute",
+            display: "flex",
+            justifyContent: "center",
+            width: "100%",
+            zIndex: 1,
+            top: 55,
+          }}
+        >
+          <BossLife />
         </div>
-      }
+      )}
+
       <div style={{ position: "absolute", zIndex: 20, width: "100%" }}>
         <animated.div style={levelSpring}>
           <div

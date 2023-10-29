@@ -1,5 +1,5 @@
 import {
-  BallCollider,
+  CuboidCollider,
   RapierRigidBody,
   RigidBody,
   interactionGroups,
@@ -12,6 +12,7 @@ import { degToRad } from "@/utils";
 import { useRef, useState } from "react";
 import useMover, { MoverProps } from "@/hooks/useMover";
 import useDestructible from "@/hooks/useDestructible";
+import { useStore } from "@/store";
 
 const clawMoveProps: Omit<MoverProps, "ref"> = {
   direction: "x",
@@ -20,6 +21,8 @@ const clawMoveProps: Omit<MoverProps, "ref"> = {
 };
 
 export function Crab({ position }: { position: [number, number, number] }) {
+  const hitBoss = useStore((state) => state.hitBoss);
+
   const refCrab = useRef<THREE.Group>(null);
 
   const [isBodyAlive, setIsBodyAlive] = useState(true);
@@ -58,7 +61,8 @@ export function Crab({ position }: { position: [number, number, number] }) {
   const { onCollide: onBodyCollide } = useDestructible({
     isEnabled: !isLeftClawAlive && !isRightClawAlive,
     meshRef: refBodyMesh,
-    health: 3,
+    health: CONFIG.BOSS_BODY_HEALTH,
+    onHit: hitBoss,
     onDestruction: () => {
       setIsBodyAlive(false);
     },
@@ -67,6 +71,7 @@ export function Crab({ position }: { position: [number, number, number] }) {
   const { onCollide: onLeftClawCollide } = useDestructible({
     meshRef: refClawLeftMesh,
     health: CONFIG.BOSS_CLAW_HEALTH,
+    onHit: hitBoss,
     onDestruction: () => {
       setIsLeftClawAlive(false);
     },
@@ -74,6 +79,7 @@ export function Crab({ position }: { position: [number, number, number] }) {
   const { onCollide: onRightClawCollide } = useDestructible({
     meshRef: refClawRightMesh,
     health: CONFIG.BOSS_CLAW_HEALTH,
+    onHit: hitBoss,
     onDestruction: () => {
       setRightClawAlive(false);
     },
@@ -99,8 +105,13 @@ export function Crab({ position }: { position: [number, number, number] }) {
           friction={0}
           restitution={1}
         >
-          <BallCollider
+          {/* <BallCollider
             args={[3.5]}
+            collisionGroups={interactionGroups(6, [0])}
+            onCollisionEnter={onBodyCollide}
+          /> */}
+          <CuboidCollider
+            args={[4, 2, 3]}
             collisionGroups={interactionGroups(6, [0])}
             onCollisionEnter={onBodyCollide}
           />
@@ -119,8 +130,14 @@ export function Crab({ position }: { position: [number, number, number] }) {
           friction={0}
           restitution={1}
         >
-          <BallCollider
+          {/* <BallCollider
             args={[1.8]}
+            collisionGroups={interactionGroups(6, [0])}
+            onCollisionEnter={onLeftClawCollide}
+          /> */}
+
+          <CuboidCollider
+            args={[1.5, 2, 1.5]}
             collisionGroups={interactionGroups(6, [0])}
             onCollisionEnter={onLeftClawCollide}
           />
@@ -139,8 +156,13 @@ export function Crab({ position }: { position: [number, number, number] }) {
           friction={0}
           restitution={1}
         >
-          <BallCollider
+          {/* <BallCollider
             args={[1.8]}
+            collisionGroups={interactionGroups(6, [0])}
+            onCollisionEnter={onRightClawCollide}
+          /> */}
+          <CuboidCollider
+            args={[1.5, 2, 1.5]}
             collisionGroups={interactionGroups(6, [0])}
             onCollisionEnter={onRightClawCollide}
           />
