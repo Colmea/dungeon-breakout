@@ -4,12 +4,13 @@ import {
   CollisionEnterPayload,
   RigidBody,
   CuboidCollider,
+  interactionGroups,
 } from "@react-three/rapier";
 import { useRef, useEffect } from "react";
 import * as THREE from "three";
 import useSound from "use-sound";
 
-import CONFIG from "@/Config";
+import CONFIG from "@/config";
 import ballHit from "@assets/sounds/ball-hit.mp3";
 
 const ANGLE_LIMIT_RAD = (CONFIG.BALL_MAX_ANGLE * Math.PI) / 180;
@@ -80,6 +81,7 @@ export default function Ball() {
         friction={0}
         restitution={1}
         onCollisionEnter={handleCollision}
+        collisionGroups={interactionGroups(0)}
       >
         <mesh castShadow>
           <sphereGeometry args={[0.7, 16, 16]} />

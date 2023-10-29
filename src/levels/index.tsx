@@ -1,6 +1,7 @@
 import Level1 from "./Level1";
 import Level2 from "./Level2";
 import Level3 from "./Level3";
+import Level4 from "./Level4";
 
 const Levels = {
   1: {
@@ -20,6 +21,12 @@ const Levels = {
     name: "Hold The Door",
     Environment: Level3,
     cameraPosition: [-4, 68, 3],
+  },
+  4: {
+    level: 4,
+    name: "BRICK VENGERS: Endgame",
+    Environment: Level4,
+    cameraPosition: [-4, 107, 3],
   },
 };
 

@@ -9,7 +9,7 @@ type Props = {
   delay?: number;
 };
 
-const useMover = ({
+const useMeshMover = ({
   meshRef,
   direction,
   speed = 3,
@@ -38,4 +38,4 @@ const useMover = ({
   });
 };
 
-export default useMover;
+export default useMeshMover;

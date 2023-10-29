@@ -2,12 +2,13 @@ import { useFrame } from "@react-three/fiber";
 import { RapierRigidBody, vec3 } from "@react-three/rapier";
 import * as THREE from "three";
 
-type Props = {
+export type MoverProps = {
   isEnabled?: boolean;
   ref: React.MutableRefObject<RapierRigidBody | null>;
   direction: "x" | "y";
   speed?: number;
   offset?: number;
+  delay?: number;
 };
 
 const useMover = ({
@@ -16,11 +17,12 @@ const useMover = ({
   direction,
   speed = 3,
   offset = 1,
-}: Props): void => {
+  delay = 0,
+}: MoverProps): void => {
   useFrame(({ clock }) => {
     if (!ref?.current || !isEnabled) return;
 
-    const t = clock.getElapsedTime();
+    const t = clock.getElapsedTime() - delay;
     const position = vec3(ref.current.translation());
 
     if (direction === "x") {

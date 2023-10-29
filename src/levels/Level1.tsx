@@ -21,7 +21,7 @@ export default function Level1() {
       />
 
       <Paddle name="paddle-1" position={[0, 0, 0]} maxDrift={2} />
-      <Background isDark length={50} width={150} position={[0, 20, -5]} />
+      <Background isDark length={50} width={250} position={[0, 20, -5]} />
       <Background length={10} width={38} position={[0, 9, -5]} />
 
       <Wall rotation={-90} position={[-5, 24, 0]} length={5} />
