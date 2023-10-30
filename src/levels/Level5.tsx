@@ -41,7 +41,7 @@ export default function Level5() {
       <Wall rotation={-180} position={[8.5, 32, 0]} length={4} />
       <Wall rotation={-180} position={[-17, 32, 0]} length={1} />
 
-      <Crab position={[-4.5, 20, 0]} />
+      <Crab position={[-4.5, 20, -1]} />
 
       <BrickLine position={[-17, 10, 0]} quantity={4} />
       <BrickLine position={[-18, 12, 0]} quantity={4} />
