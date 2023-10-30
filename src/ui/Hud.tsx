@@ -80,7 +80,7 @@ export default function Hud() {
             justifyContent: "center",
             width: "100%",
             zIndex: 1,
-            top: 0,
+            top: 60,
           }}
         >
           <BossLife />
